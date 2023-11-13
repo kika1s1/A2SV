@@ -1,7 +1,13 @@
 class Solution(object):
     def relativeSortArray(self, arr1, arr2):
-        c = collections.Counter(arr1)
-        res = []       
+        answer = []
         for i in arr2:
-            res += [i]*c.pop(i)  
-        return res + sorted(c.elements())
+            for j in range(arr1.count(i)):
+                answer.append(i)
+        sort1 = sorted(arr1)
+        for i in sort1:
+            if not i in answer:
+                total = sort1.count(i)
+                for j in range(total):
+                    answer.append(i)
+        return answer
