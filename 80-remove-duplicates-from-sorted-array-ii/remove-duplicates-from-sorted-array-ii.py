@@ -8,4 +8,3 @@ class Solution:
         return len(nums)
 
 
-ans = Solution()
