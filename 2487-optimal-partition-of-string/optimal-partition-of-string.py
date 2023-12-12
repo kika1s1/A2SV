@@ -7,7 +7,8 @@ class Solution:
         for i in range(len(s)):
             if s[i] not in ans:
                 ans.append(s[i])
-            elif s[i] in ans:
+            else:
+                
                 counter += 1
                 ans.clear()
                 ans.append(s[i])
