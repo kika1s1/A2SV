@@ -5,9 +5,7 @@ class Solution:
         ans = []
         counter = 1
         for i in range(len(s)):
-            if len(ans) == 0:
-                ans.append(s[i])
-            elif s[i] not in ans:
+            if s[i] not in ans:
                 ans.append(s[i])
             elif s[i] in ans:
                 counter += 1
