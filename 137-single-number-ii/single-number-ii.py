@@ -4,4 +4,3 @@ class Solution:
         for i, value in dictRep.items():
             if value == 1:
                 return i
-        return 0
