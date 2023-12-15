@@ -6,3 +6,4 @@ class Solution:
             if 2**i > n:
                 return False
         
+        
