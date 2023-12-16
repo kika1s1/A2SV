@@ -13,15 +13,15 @@ This repository contains a collection of LeetCode questions and their correspond
 
 The repository follows a consistent folder structure for each LeetCode question:
 ```
-- ├── Question1
-- │ ├── solution.py
-- │ └── README.md
-- ├── Question2
-- │ ├── solution.cpp
-- │ └── README.md
-- ├── Question3
-- │ ├── solution.java
-- │ └── README.md
+├── Question1
+│ ├── solution.py
+│ └── README.md
+├── Question2
+│ ├── solution.cpp
+│ └── README.md
+├── Question3
+│ ├── solution.java
+│ └── README.md
 ```
 
 - Each question has its own folder named `QuestionX`, where X represents the question number.
