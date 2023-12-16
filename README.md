@@ -8,22 +8,21 @@ This repository contains a collection of LeetCode questions and their correspond
 - [Question 1](./Question1): Brief description of the problem and solution.
 - [Question 2](./Question2): Brief description of the problem and solution.
 - [Question 3](./Question3): Brief description of the problem and solution.
-- ...
 
 ## Folder Structure
 
 The repository follows a consistent folder structure for each LeetCode question:
-
-├── Question1
-│ ├── solution.py
-│ └── README.md
-├── Question2
-│ ├── solution.cpp
-│ └── README.md
-├── Question3
-│ ├── solution.java
-│ └── README.md
-├──
+```
+- ├── Question1
+- │ ├── solution.py
+- │ └── README.md
+- ├── Question2
+- │ ├── solution.cpp
+- │ └── README.md
+- ├── Question3
+- │ ├── solution.java
+- │ └── README.md
+```
 
 - Each question has its own folder named `QuestionX`, where X represents the question number.
 - Inside each question folder, you can find the solution file(s) and a README.md file.
