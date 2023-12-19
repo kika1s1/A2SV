@@ -2,8 +2,8 @@ class Solution:
     def findLucky(self, arr: List[int]) -> int:
         arr.sort()
         ans = -1
-        for i in arr:
-            if i == arr.count(i):
+        repHash = Counter(arr)
+        for i, j in repHash.items():
+            if i == j:
                 ans = i
-
         return ans
