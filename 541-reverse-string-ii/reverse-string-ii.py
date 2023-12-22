@@ -1,9 +1,14 @@
 class Solution:
     def reverseStr(self, s: str, k: int) -> str:
-        i = 0
-        S = ''
-        while i < len(s):
-            S += s[i:i + k][::-1]
-            S += s[i + k:i + k + k]
-            i += k + k
-        return S
+        result = []
+
+        for i in range(0, len(s), k):
+            w = s[i: i+k]
+
+            if len(result) % 2 == 0:
+                w = w[::-1]
+            
+            result.append(w)
+
+        return ''.join(result)
+        
