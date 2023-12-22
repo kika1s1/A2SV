@@ -1,17 +1,20 @@
-def swap(a,b):
-    return b,a
-def backtrack(a, ans, l, r):
-    if l==r:
-        if a not in ans:
-            ans.append(list(a))
-        return
-    for i in range(l,r):
-        a[i], a[l] = swap(a[i], a[l])
-        backtrack(a, ans, l+1, r)
-        a[i], a[l] = swap(a[i], a[l])
-    return
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        backtrack(nums, ans, 0, len(nums))
-        return ans 
+        result = []
+        nums.sort()
+
+        def traversal(temp, lst):
+            if len(temp) == len(nums):
+                result.append(temp[:])
+                return
+            i = 0 
+            while i <= len(lst)-1:
+                while i < len(lst)-1 and lst[i] == lst[i+1]:
+                    i += 1
+                temp.append(lst[i])
+                traversal(temp, lst[:i]+lst[i+1:])
+                i += 1
+                temp.pop()
+        
+        traversal([],nums)
+        return result
