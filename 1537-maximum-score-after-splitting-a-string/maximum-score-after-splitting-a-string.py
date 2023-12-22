@@ -1,16 +1,14 @@
 class Solution:
     def maxScore(self, s: str) -> int:
-        curr0, curr1, total1 = 0, 0, 0
+        maximum = 0
+        r = 1
+        while r < len(s):
+            left = s[:r]
+            right = s[r:]
+            total = left.count("0") + right.count("1")
+            if total > maximum:
+                maximum = total
+            r +=1
+        return maximum
 
-        for c in s:
-            if c == '1':
-                total1 += 1
         
-        res = 0
-        for c in s[:-1]:
-            if c == '0':
-                curr0 += 1
-            else:
-                curr1 += 1
-            res = max(res, curr0 + total1-curr1)
-        return res
