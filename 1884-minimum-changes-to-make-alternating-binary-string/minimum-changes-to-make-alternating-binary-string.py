@@ -1,9 +1,11 @@
 class Solution:
     def minOperations(self, s: str) -> int:
-        ans1=ans2=0
-        for idx,x in enumerate(s):
-            if idx%2==int(x):
-                ans1+=1
-            else:
-                ans2+=1
-        return min(ans1,ans2)            
+        change_1 = 0
+        cur = True
+
+        for c in s:
+            if cur == (c == "0"):
+                change_1 += 1
+            
+            cur = not cur
+        return min(change_1, len(s) - change_1)
