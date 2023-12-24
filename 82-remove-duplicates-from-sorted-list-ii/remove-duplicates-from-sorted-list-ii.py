@@ -3,24 +3,21 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:
-    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head or not head.next:
-            return head
-
-        dummy = ListNode(0)
-        dummy.next = head
-
+class Solution(object):
+    def deleteDuplicates(self, head):
+        dummy = ListNode('d')
         prev = dummy
-        curr = head
+        current = head
+        prev.next = current
+        
+        while current:
+            while current.next and current.val == current.next.val:
+                current = current.next
 
-        while curr and curr.next:
-            if curr.val == curr.next.val:
-                while curr.next and curr.val == curr.next.val:
-                    curr = curr.next
-                prev.next = curr.next
+            if prev.next == current:
+               prev = prev.next
             else:
-                prev = prev.next
-            curr = curr.next
+                prev.next = current.next
 
+            current = current.next
         return dummy.next
