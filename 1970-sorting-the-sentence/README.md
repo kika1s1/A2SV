@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/sorting-the-sentence">1970. Sorting the Sentence</a></h2><h3>Easy</h3><hr><p>A <strong>sentence</strong> is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.</p>
+<h2><a href="https://leetcode.com/problems/sorting-the-sentence">Sorting the Sentence</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr><p>A <strong>sentence</strong> is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters.</p>
 
 <p>A sentence can be <strong>shuffled</strong> by appending the <strong>1-indexed word position</strong> to each word then rearranging the words in the sentence.</p>
 
