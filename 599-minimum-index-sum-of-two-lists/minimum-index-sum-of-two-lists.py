@@ -1,12 +1,15 @@
 class Solution:
     def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
-        d={}
-        for i in range(len(list1)):
-            for j in range(len(list2)):
-                if list1[i] == list2[j]:
-                    d[list1[i]] = i+j
-        lst=[]
-        for i,j in d.items():
-            if j == min(d.values()):
-                lst.append(i)
-        return lst
+        l1 = {w : i for i, w in enumerate(list1)}
+        c = math.inf
+        res = []
+        for i, w in enumerate(list2):
+          if w in l1:
+            if i + l1[w] < c:
+              c = min(c, i+l1[w])
+              res = []
+              res.append(w)
+            elif i + l1[w] == c:
+              res.append(w)
+
+        return res
