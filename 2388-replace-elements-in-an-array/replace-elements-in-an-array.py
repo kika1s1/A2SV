@@ -1,13 +1,12 @@
 class Solution:
-    def arrayChange(self, nums, ops):
+    def arrayChange(self, nums: List[int], operations: List[List[int]]) -> List[int]:
         mp = {}
-        
+
         for i in range(len(nums)):
             mp[nums[i]] = i
-        
-        for op in ops:
-            currele, newele = op[0], op[1]
-            nums[mp[currele]] = newele
-            mp[newele] = mp[currele]
-        
+        for i, j in operations:
+            current, newEl = i, j
+            nums[mp[current]] = newEl
+            mp[newEl] = mp[current]
+
         return nums
