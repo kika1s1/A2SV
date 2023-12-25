@@ -7,3 +7,6 @@ class Solution:
             else:
                 return True
         return False
+        # i use set because searching value in set is O(1)
+        # because set is build using hashmap
+        
