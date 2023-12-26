@@ -6,5 +6,4 @@ class Solution:
             ans += mat[i][i]
             if len(mat)-1-i != i:
                 ans += mat[i][len(mat)-1-i]
-                print(mat[i][len(mat)-1-i])
         return ans
