@@ -4,16 +4,17 @@ class Solution(object):
         :type operations: List[str]
         :rtype: int
         """
-        ans = []
-        for i in operations:
-            if i.isnumeric():
-                ans.append(int(i))
-            if i.startswith('-'):
-                    ans.append(eval(i))
-            elif i == "C":
-                ans.pop()
-            elif i == "D":
-                ans.append(2*ans[-1])
-            elif i == "+":
-                ans.append((ans[-1])+(ans[-2]))
-        return sum(ans)
+        res = []
+        for elem in operations:
+            if elem == 'C':
+                res.pop()
+            elif elem == 'D':
+                double = res[-1] * 2
+                res.append(double)
+            elif elem == '+':
+                prev2 = res[-2::]
+                res.append(sum(prev2))
+            else:
+                res.append(int(elem))
+
+        return sum(res)
