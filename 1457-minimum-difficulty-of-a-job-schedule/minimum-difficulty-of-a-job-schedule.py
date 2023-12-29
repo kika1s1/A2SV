@@ -1,20 +1,22 @@
 class Solution:
-    def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
+    def minDifficulty(self, jobDifficulty, d):
         n = len(jobDifficulty)
-        if d > n:
+        if n < d:
             return -1
-        
-        dp = [[float('inf') for _ in range(n)] for _ in range(d)]
-        dp[0][0] = jobDifficulty[0]
-        
-        dp[0] = [max(jobDifficulty[:i+1]) for i in range(n)]
-        
-        for day in range(1, d):
+        prev = [float('inf')] * n
+        curr = [float('inf')] * n
+        for day in range(d):
+            stack = []
             for i in range(day, n):
-                if day == i:
-                    dp[day][i] = sum(jobDifficulty[:i+1])
-                    continue
-                for j in range(day-1, i):
-                    dp[day][i] = min(dp[day][i], dp[day-1][j] + max(jobDifficulty[j+1:i+1]))
-            
-        return dp[d-1][n-1]
+                if i == 0:
+                    curr[i] = jobDifficulty[0]
+                else:
+                    curr[i] = prev[i - 1] + jobDifficulty[i]
+                while stack and jobDifficulty[stack[-1]] <= jobDifficulty[i]:
+                    j = stack.pop()
+                    curr[i] = min(curr[i], curr[j] + jobDifficulty[i] - jobDifficulty[j])
+                if stack:
+                    curr[i] = min(curr[i], curr[stack[-1]])
+                stack.append(i)
+            prev, curr = curr, prev
+        return prev[-1]
