@@ -1,22 +1,20 @@
 class Solution:
-    def minDifficulty(self, jobDifficulty, d):
-        len_dif = len(jobDifficulty)
-        if len_dif < d:
+    def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
+        n = len(jobDifficulty)
+        if d > n:
             return -1
-        cache = {}
-        def count(index, d, cur_max):
-            if index == len_dif:
-                return 0 if d == 0 else float("inf")
-            if d <= 0:
-                return float("inf")
-            if (index, d, cur_max) in cache:
-                return cache[(index, d, cur_max)]
-            res = 0
-            cur_max = max(jobDifficulty[index], cur_max)
-            res += min(
-                cur_max + count(index+1, d-1, -1),
-                count(index + 1, d, cur_max)
-            )
-            cache[(index, d, cur_max)] = res
-            return res
-        return count(0, d, jobDifficulty[0])
+        
+        dp = [[float('inf') for _ in range(n)] for _ in range(d)]
+        dp[0][0] = jobDifficulty[0]
+        
+        dp[0] = [max(jobDifficulty[:i+1]) for i in range(n)]
+        
+        for day in range(1, d):
+            for i in range(day, n):
+                if day == i:
+                    dp[day][i] = sum(jobDifficulty[:i+1])
+                    continue
+                for j in range(day-1, i):
+                    dp[day][i] = min(dp[day][i], dp[day-1][j] + max(jobDifficulty[j+1:i+1]))
+            
+        return dp[d-1][n-1]
