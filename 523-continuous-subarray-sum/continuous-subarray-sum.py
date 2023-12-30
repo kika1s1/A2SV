@@ -8,6 +8,7 @@ class Solution:
         # return False
 
         reminder = {0:-1}
+        # if the first index is divisible pass
         total = 0
         for i, n in enumerate(nums):
             total +=n
