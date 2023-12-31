@@ -6,7 +6,7 @@ class Solution(object):
         """
         res  = ""
         for i in s:
-            if i.isalpha() or i.isnumeric():
+            if i.isalnum():
                 res +=i
         
         return res.lower() == res[::-1].lower()
