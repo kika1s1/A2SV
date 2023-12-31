@@ -3,19 +3,25 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        l_c = []
-
+        if len(matrix) == 0:
+            return matrix
+        M, N = len(matrix), len(matrix[0])
+        removed_row_idxes, removed_col_idxes = [], []
         for i in range(len(matrix)):
-            for j in range(len(matrix[i])):
-                if matrix[i][j] == 0:
-                    l_c.append(j)
+            for j in range(len(matrix[0])):
+                if matrix[i][j] != 0:
+                    continue
 
-        for i in range(len(matrix)):
-            if 0 in matrix[i]:
-                for ii in range(len(matrix[i])):
-                    matrix[i][ii] = 0
-            else:
-                for _ in l_c:
-                    matrix[i][_] = 0
+                if i not in removed_row_idxes:
+                    removed_row_idxes.append(i)
+                
+                if j not in removed_col_idxes:
+                    removed_col_idxes.append(j)
+        for r in removed_row_idxes:
+            for k in range(len(matrix[r])):
+                matrix[r][k] = 0
+
+        for c in removed_col_idxes:
+            for k in range(len(matrix)):
+                matrix[k][c] = 0    
         return matrix
-
