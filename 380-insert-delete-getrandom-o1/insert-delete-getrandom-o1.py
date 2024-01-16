@@ -1,28 +1,35 @@
 class RandomizedSet:
 
     def __init__(self):
-        self.items = set()
-
+        self.dic_direct = {}
+        self.dic_invert = {}
+        self.num_elem = 0
         
-
     def insert(self, val: int) -> bool:
-        if val in self.items:
+        if val in self.dic_invert:
             return False
-        self.items.add(val)
-        return True
-        
-
-    def remove(self, val: int) -> bool:
-        if val in self.items:
-            self.items.remove(val)
+        else:
+            self.dic_invert[val] = self.num_elem
+            self.dic_direct[self.num_elem] = val
+            self.num_elem += 1
             return True
-        return False
-
         
-
-    def getRandom(self) -> int:
-        random_index = random.randint(0, len(self.items) - 1)
-        return list(self.items)[random_index]
+    def remove(self, val):
+        if val not in self.dic_invert:
+            return False
+        else:
+            ind = self.dic_invert.pop(val)
+            self.dic_direct.pop(ind)
+            if ind != self.num_elem - 1:
+                self.dic_direct[ind] = self.dic_direct[self.num_elem - 1]
+                self.dic_invert[self.dic_direct[self.num_elem - 1]] = ind
+                self.dic_direct.pop(self.num_elem - 1)
+            self.num_elem -= 1
+            return True
+        
+    def getRandom(self):
+        index = floor(random.random()*self.num_elem)
+        return self.dic_direct[index]
         
 
 
