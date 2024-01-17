@@ -2,10 +2,8 @@ class Solution:
     def getAverages(self, nums: List[int], k: int) -> List[int]:
         if k == 0:
             return nums
-        if k*2 > len(nums):
+        if k*2 >= len(nums):
             return [-1]*len(nums)
-        if nums == [2,1]:
-            return [-1, -1]
         ans = []
         for i in range(k):
             ans.append(-1)
