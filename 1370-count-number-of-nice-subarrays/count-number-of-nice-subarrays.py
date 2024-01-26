@@ -1,9 +1,15 @@
+from collections import defaultdict
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        ans = 0
-        helper = [-1] + [i for i, el in enumerate(nums) if el % 2] + [len(nums)]
+        count = 0
+        table = defaultdict(int)
+        table[k] = 1
+        nice_subarray = 0
+        for num in nums:
+            if num%2==1:
+                 count+=1
+            nice_subarray += table[count]
+            table[k+count] += 1
 
-        for i in range(1, len(helper) - k):
-            ans += (helper[i] - helper[i - 1]) * (helper[i + k] - helper[i + k - 1])
-
-        return ans
+        print(table)
+        return nice_subarray
