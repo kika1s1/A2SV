@@ -11,5 +11,4 @@ class Solution:
             nice_subarray += table[count]
             table[k+count] += 1
 
-        print(table)
         return nice_subarray
