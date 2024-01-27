@@ -9,7 +9,7 @@ class Solution:
             sub = num[i:k+i]
             if int(sub) == 0:
                 continue
-            if int(num) % int(sub) == 0:
+            elif int(num) % int(sub) == 0:
                 cnt +=1
         return cnt
 
