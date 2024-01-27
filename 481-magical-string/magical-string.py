@@ -1,11 +1,8 @@
+s = [1, 2, 2]
+i = 2
+while len(s) <= 10**5:
+    s+=[3-s[-1]]*s[i]
+    i+=1
 class Solution:
     def magicalString(self, n: int) -> int:
-        s = ["1", "2", "2"]
-        for i in range(2, n):
-            p = s[-1] == "2"
-            if(s[-1] == '2'):
-                s += ["1"] * int(s[i])
-            else:
-                s += ["2"] * int(s[i])
-            if(len(s) > n): break
-        return s[:n].count('1')
+        return s[:n].count(1)
