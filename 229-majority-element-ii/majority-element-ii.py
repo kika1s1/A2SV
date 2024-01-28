@@ -1,5 +1,6 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> List[int]:
+        #tamirat
         ans = []
         rep = Counter(nums)
         checkPoint = len(nums)/3
