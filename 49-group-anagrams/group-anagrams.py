@@ -1,15 +1,16 @@
 class Solution:
-    def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
-        dictAnagram = {}
-        for anagram in strs:
-            b = "".join(sorted(anagram))
-            if b not in dictAnagram:
-                dictAnagram[b] = [anagram]
-            else:
-                arr = dictAnagram[b]
-                arr.append(anagram)
-
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        HashMap = {}
         ans = []
-        for i in dictAnagram.values():
+        for n in strs:
+            name = "".join(sorted(list(n)))
+
+            if name in HashMap:
+                HashMap[name].append(n)
+            else:
+                HashMap[name] = [n]
+        for i in HashMap.values():
             ans.append(i)
         return ans
+        
+            
