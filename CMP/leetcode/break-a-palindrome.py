@@ -5,8 +5,6 @@ class Solution:
             return ""
         for i in palindrome:
             if i != "a":
-                prev = i
-                print(prev)
                 palindrome = palindrome.replace(i, "a", 1)
                 if palindrome == palindrome[::-1]:
                     palindrome = copPal
