@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/smallest-even-multiple">2491. Smallest Even Multiple</a></h2><h3>Easy</h3><hr>Given a <strong>positive</strong> integer <code>n</code>, return <em>the smallest positive integer that is a multiple of <strong>both</strong> </em><code>2</code><em> and </em><code>n</code>.
+<h2><a href="https://leetcode.com/problems/smallest-even-multiple">Smallest Even Multiple</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr>Given a <strong>positive</strong> integer <code>n</code>, return <em>the smallest positive integer that is a multiple of <strong>both</strong> </em><code>2</code><em> and </em><code>n</code>.
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
