@@ -16,7 +16,7 @@ class Solution:
                 max_queue.pop()
             max_queue.append(nums[end])
             
-            while max_queue[0] - min_queue[0] > limit:
+            if max_queue[0] - min_queue[0] > limit:
                 if max_queue[0] == nums[start]:
                     max_queue.pop(0)
                 if min_queue[0] == nums[start]:
