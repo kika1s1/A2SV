@@ -1,9 +1,9 @@
 class Solution(object):
     def reverseString(self, s):
-        """
-        :type s: List[str]
-        :rtype: None Do not return anything, modify s in-place instead.
-        """
-        s.reverse()
-        return s
-        
+        def helper(start, end):
+            if start >= end:
+                return
+            s[start], s[end] = s[end], s[start]
+            helper(start + 1, end - 1)
+
+        helper(0, len(s) - 1)
