@@ -7,3 +7,4 @@ class Solution(object):
             helper(start + 1, end - 1)
 
         helper(0, len(s) - 1)
+        return s
