@@ -18,7 +18,7 @@ class Solution(object):
                 dfs(root.right)
         dfs(root)
         dataList = list(data.items())
-        print(dataList)
+        # print(dataList)
         dataList.sort(key=lambda x: x[1], reverse=True)
         items = []
         for i in range(len(dataList)):
