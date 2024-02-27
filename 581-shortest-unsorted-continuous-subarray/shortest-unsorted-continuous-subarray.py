@@ -1,21 +1,17 @@
 class Solution:
-    def findUnsortedSubarray(self, nums: list[int]) -> int:
-        l, r = 0, len(nums)
-        totalLength = len(nums)
-        if len(nums) == 1:
-            return 0
-        while l < r:
-            sub = nums[l:r]
-            if (min(sub) != nums[l]) and (max(sub) != nums[r-1]):
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+
+        nums_copy = sorted(nums)
+        diff = []
+        for i in range(len(nums)):
+            diff.append(abs(nums[i]-nums_copy[i]))
+        prev = 0
+        end = 0
+        for i, j in enumerate(diff):
+            if j > 0:
+                prev = i
                 break
-            if min(sub) == nums[l]:
-                l += 1
-                if totalLength == 0:
-                    break
-                totalLength -= 1
-            if max(sub) == nums[r-1]:
-                r -= 1
-                if totalLength == 0:
-                    break
-                totalLength -= 1
-        return totalLength
+        for i, j in enumerate(diff):
+            if j > 0:
+                end = i
+        return 0 if end-prev == 0 else (end-prev) + 1
