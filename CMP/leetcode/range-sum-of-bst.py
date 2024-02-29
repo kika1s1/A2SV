@@ -6,11 +6,16 @@
 #         self.right = right
 class Solution:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        s, nodes = 0, [root]
-        while nodes:
-            node, nodes = nodes[0], nodes[1:]
-            if node.val>=low and node.val<=high:
-                s += node.val
-            if node.right: nodes = [node.right] + nodes
-            if node.left: nodes = [node.left] + nodes
-        return s 
+        total = [0]  # Use a mutable object, like a list, for total
+
+        def preorder(root, total, low, high):
+            if root.val >= low and root.val <= high:
+                total[0] += root.val
+            if root.left is not None:
+                preorder(root.left, total, low, high)
+            if root.right is not None:
+                preorder(root.right, total, low, high)
+        
+        preorder(root, total, low, high)
+        return total[0]
+        
