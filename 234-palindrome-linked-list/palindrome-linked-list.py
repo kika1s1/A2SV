@@ -5,17 +5,10 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        lst = []
+        ls = []
         temp = head
         while temp:
-            lst.append(temp.val)
+            ls.append(temp.val)
             temp = temp.next
-        cnt = 0
-        temp = head
-        while temp:
-            if temp.val !=lst[-1-cnt]:
-                return False
-            cnt +=1
-            temp = temp.next
-        return True
+        return ls ==ls[::-1]
         
