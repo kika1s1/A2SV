@@ -7,7 +7,7 @@ class Solution:
                 self.items[j] = {i}
             else:
                 self.items[j].add(i)
-        print(self.items)
+       
 
 
     def pick(self, target: int) -> int:
