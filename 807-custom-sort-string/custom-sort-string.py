@@ -1,11 +1,11 @@
 class Solution:
     def customSortString(self, order: str, s: str) -> str:
-        st = set(s)
+        st, cnt = set(s), Counter(s)
         odr = set(order)
         ans = ""
         for i in order:
             if i in st:
-                ans +=i*s.count(i)
+                ans +=i*cnt[i]
         for i in s:
             if i not in odr:
                 ans +=i
