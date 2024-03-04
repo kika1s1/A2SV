@@ -13,7 +13,6 @@ class Solution:
                 tokens.pop(0)
             elif score >= 1 and len(tokens) >=2:
                 cnt -=1
-                # score = max(cnt, score) 
                 power +=tokens[-1]
                 tokens.pop(len(tokens)-1)
                 
