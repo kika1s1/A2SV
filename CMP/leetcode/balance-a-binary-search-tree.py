@@ -8,16 +8,15 @@ class Solution:
     def balanceBST(self, root: TreeNode) -> TreeNode:
 
         nums=[]
-        def preOrder(root, nums):
+        def inOrder(root, nums):
             if not root:
                 return
-            nums.append(root.val)
             if root.left is not None:
-                preOrder(root.left, nums)
+                inOrder(root.left, nums)
+            nums.append(root.val)
             if root.right is not None:
-                preOrder(root.right, nums)
-        preOrder(root, nums)
-        nums.sort()
+                inOrder(root.right, nums)
+        inOrder(root, nums)
         def helper(left,right):
             if left>right:
                 return None
