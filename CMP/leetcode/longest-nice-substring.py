@@ -1,11 +1,7 @@
 class Solution:
     def longestNiceSubstring(self, s: str) -> str:
-        ans = ""
-        for i in range(len(s)):
-            for j in range(i, len(s)):
-                sub = s[i:j+1]
-                checker  = set(s[i:j+1])
-                if all(i in checker for i in sub.swapcase()):
-                    if len(ans) < len(sub):
-                        ans = sub
-        return ans
+        char = set(s)
+        for i, c in enumerate(s):
+            if c.swapcase() not in char:
+                return max(self.longestNiceSubstring(s[:i]), self.longestNiceSubstring(s[i+1:]), key = len)
+        return s
