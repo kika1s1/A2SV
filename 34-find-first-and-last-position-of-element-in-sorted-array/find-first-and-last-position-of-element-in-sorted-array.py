@@ -1,12 +1,31 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        ans = []
-        for i, num in enumerate(nums):
-            if num == target:
-                ans.append(i)
-                break
-        for i,num in enumerate(nums[::-1]):
-            if num == target:
-                ans.append(len(nums)-1-i)
-                break
-        return ans if len(ans) !=0 else [-1, -1]
+        start = -1
+        end = -1
+
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            
+            if nums[mid] == target:
+                start = mid
+                right = mid - 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+
+            if nums[mid] == target:
+                end = mid
+                left = mid + 1
+            
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return (start, end)
