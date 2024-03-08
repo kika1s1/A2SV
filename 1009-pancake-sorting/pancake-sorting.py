@@ -1,15 +1,14 @@
-class Solution(object):
-    def pancakeSort(self, arr):
-        """
-        :type arr: List[int]
-        :rtype: List[int]
-        """
-        res = []
-        for i in range(len(arr)-1, -1, -1):
-            flip = 1 + arr.index(i+1)
-            if flip != i+1:
-                arr[:flip] = arr[:flip][::-1]
-                arr[:i+1] = arr[:i+1][::-1]
-                res.append(flip)
-                res.append(i+1)
-        return res
+class Solution:
+    def pancakeSort(self, A: List[int]) -> List[int]:
+        x = len(A)
+        k = []
+        
+        for indx in range(x):
+            max_ = max(A[:x - indx])
+            max_indx = A.index(max_) + 1
+            A[:max_indx] = reversed(A[:max_indx])
+            k.append(max_indx)
+            
+            A[:x - indx] = reversed(A[:x - indx])
+            k.append(x - indx)
+        return k
