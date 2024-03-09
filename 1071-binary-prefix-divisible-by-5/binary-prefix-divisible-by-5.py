@@ -1,12 +1,8 @@
 class Solution:
     def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
-        ans = []
-        pref = ""
+        res=[]
+        num=0
         for i in nums:
-            pref +=str(i)
-            num = int(pref, 2)
-            if num%5 == 0:
-                ans.append(True)
-            else:
-                ans.append(False)
-        return ans
+            num=(num*2+i)%5
+            res.append(num==0)
+        return res
