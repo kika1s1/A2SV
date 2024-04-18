@@ -1,30 +1,22 @@
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        def checkPerimeter(grid, r, c, ROWS, COLS):
-            if grid[r][c] == 0:
+        rows, cols = len(grid), len(grid[0])
+        perimeter = 0
+        
+        def dfs(r, c):
+            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == 0:
+                return 1
+            if grid[r][c] == -1:
                 return 0
-           
-            cnt_direction = 4
-            if c < COLS-1:
-                if grid[r][c+1] == 1:
-                    cnt_direction -=1
-            if r>0 and ROWS > r:
-                if grid[r-1][c] == 1:
-                    cnt_direction -=1
-            if c > 0 and COLS > c:
-                if grid[r][c-1] == 1:
-                    cnt_direction -=1
-            if r < ROWS-1:
-                if grid[r+1][c] == 1:
-                    cnt_direction -=1
-            return cnt_direction
+            grid[r][c] = -1
+            return (dfs(r + 1, c) +
+                    dfs(r - 1, c) +
+                    dfs(r, c + 1) +
+                    dfs(r, c - 1))
 
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 1:
+                    perimeter += dfs(r, c)
 
-
-
-        cnt = 0
-        ROWS, COLS = len(grid), len(grid[0])
-        for c in range(COLS):
-            for r in range(ROWS):
-                cnt += (checkPerimeter(grid, r, c, ROWS, COLS))
-        return cnt
+        return perimeter
