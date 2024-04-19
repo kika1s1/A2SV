@@ -6,7 +6,6 @@ class SmallestInfiniteSet:
 
     def popSmallest(self) -> int:
         val = heappop(self.heap)
-        self.popped.add(val)
         return val
         
         
