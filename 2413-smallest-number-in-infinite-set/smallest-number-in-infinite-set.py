@@ -2,7 +2,6 @@ class SmallestInfiniteSet:
 
     def __init__(self):
         self.heap = [x for x in range(1, 1000+1)]
-        self.popped = set()
 
     def popSmallest(self) -> int:
         val = heappop(self.heap)
