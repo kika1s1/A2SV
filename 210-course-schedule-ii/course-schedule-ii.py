@@ -11,7 +11,6 @@ class Solution:
             graph[prerequisite_course].append(course)
             in_degrees[course] += 1
         
-        # Step 2: Perform topological sorting using BFS
         queue = deque()
         for course in range(numCourses):
             if in_degrees[course] == 0:
