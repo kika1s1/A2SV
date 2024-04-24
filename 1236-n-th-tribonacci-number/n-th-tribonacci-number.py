@@ -1,6 +1,5 @@
 class Solution:
     def tribonacci(self, n: int) -> int:
-        cnt = 0
         a, b, c = 0, 1, 1
         if n ==0:
             return 0
