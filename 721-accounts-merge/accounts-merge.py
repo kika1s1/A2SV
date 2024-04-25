@@ -1,48 +1,39 @@
-from typing import *
-from collections import defaultdict
-class UnionFind:
-    def __init__(self, size):
-        self.parent = [i for i in range(size)] 
-        self.rank = [i for i in range(size)]
-        
-    def find(self, x):
-        if self.parent[x] == x:
-            return x
-        return self.find(self.parent[x])
-        
-    
-    def union(self, x, y):
-        rooty = self.find(y)
-        rootx = self.find(x)
-        if self.rank[rootx] > self.rank[rooty]:
-            self.parent[rooty] = rootx
-            self.rank[rootx] += 1
-        elif self.rank[rootx] > self.rank[rooty]:
-            self.parent[rooty] = rootx
-        else:
-            self.parent[rootx] = rooty
-                
-    def connected(self, x, y):
-        return self.find(x) == self.find(y)
-
-
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         n = len(accounts)
-        uf = UnionFind(n)
-        for i in range(n):
-            for j in range(i+1, n):
-                acc1 = set(accounts[i][1:])
-                acc2 = set(accounts[j][1:])
-                for email in acc1:
-                    if email in acc2:
-                        uf.union(i, j)
-        res = defaultdict(set)
-        for i in range(n):
-             parent = uf.find(i)
-             for email in accounts[i][1:]:
-                res[parent].add(email)
-        ans = []
-        for id, emails in res.items():
-            ans.append([accounts[id][0]] + sorted(emails))
-        return ans
+        parent = [i for i in range(n)]
+        
+        def find(n):
+            p = parent[n]
+            while p != parent[p]:
+                parent[p] = parent[parent[p]]
+                p = parent[p]
+            return p
+        
+        def union(u, v):
+            p1, p2 = find(u), find(v)
+            if p1 == p2:
+                return True
+            parent[p1] = p2
+            return False
+        
+        seen = defaultdict()
+        
+        for i, account in enumerate(accounts):
+            emails = account[1:]
+            for email in emails:
+                if email not in seen:
+                    seen[email] = i
+                else:
+                    union(i, seen[email])
+        
+        all_emails = defaultdict(set)
+        for email, i in seen.items():
+            all_emails[find(i)].add(email)
+        
+        res = []
+        
+        for index, emails in all_emails.items():
+            res.append([accounts[index][0]] + sorted(emails))
+        
+        return res
