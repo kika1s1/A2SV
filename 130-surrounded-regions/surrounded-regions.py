@@ -1,45 +1,61 @@
 from typing import List
 
+class UnionFind:
+    def __init__(self, n: int):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+
+    def find(self, x: int) -> int:
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x: int, y: int) -> None:
+        root_x = self.find(x)
+        root_y = self.find(y)
+
+        if root_x != root_y:
+            if self.rank[root_x] < self.rank[root_y]:
+                self.parent[root_x] = root_y
+            elif self.rank[root_x] > self.rank[root_y]:
+                self.parent[root_y] = root_x
+            else:
+                self.parent[root_y] = root_x
+                self.rank[root_x] += 1
+
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
-        def dfs(i: int, j: int) -> None:
-            if i < 0 or i >= rows or j < 0 or j >= cols or board[i][j] != 'O':
-                return
-
-            board[i][j] = 'B'  # Mark the cell as 'B' to indicate it's not surrounded
-
-            # Recursively check neighboring cells
-            dfs(i - 1, j)  # Up
-            dfs(i + 1, j)  # Down
-            dfs(i, j - 1)  # Left
-            dfs(i, j + 1)  # Right
-
         if not board:
             return
 
         rows, cols = len(board), len(board[0])
+        uf = UnionFind(rows * cols + 1)  # +1 for the virtual node
 
-        # Check the boundaries for the first and last columns
-        for i in range(rows):
-            if board[i][0] == 'O':
-                dfs(i, 0)
-            if board[i][cols - 1] == 'O':
-                dfs(i, cols - 1)
+        virtual_node = rows * cols
 
-        # Check the boundaries for the first and last rows
-        for j in range(cols):
-            if board[0][j] == 'O':
-                dfs(0, j)
-            if board[rows - 1][j] == 'O':
-                dfs(rows - 1, j)
-
-        # Flip 'O' cells to 'X' and 'B' cells to 'O'
+        # Connect boundary 'O' cells to the virtual node
         for i in range(rows):
             for j in range(cols):
                 if board[i][j] == 'O':
+                    if i == 0 or i == rows - 1 or j == 0 or j == cols - 1:
+                        uf.union(i * cols + j, virtual_node)
+
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+        # Connect adjacent 'O' cells
+        for i in range(rows):
+            for j in range(cols):
+                if board[i][j] == 'O':
+                    for dx, dy in directions:
+                        ni, nj = i + dx, j + dy
+                        if 0 <= ni < rows and 0 <= nj < cols and board[ni][nj] == 'O':
+                            uf.union(i * cols + j, ni * cols + nj)
+
+        # Flip surrounded 'O' cells to 'X'
+        for i in range(rows):
+            for j in range(cols):
+                if board[i][j] == 'O' and uf.find(i * cols + j) != uf.find(virtual_node):
                     board[i][j] = 'X'
-                elif board[i][j] == 'B':
-                    board[i][j] = 'O'
