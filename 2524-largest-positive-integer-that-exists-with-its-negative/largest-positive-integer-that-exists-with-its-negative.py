@@ -1,17 +1,16 @@
 class Solution:
     def findMaxK(self, nums: List[int]) -> int:
-        seen = set()
-        maxim = float("-inf")
-        for i in nums:
-            if i < 0:
-                if -1*i in seen:
-                    maxim = max(abs(i), maxim)
-                seen.add(i)
+        nums.sort() 
+        left, right = 0, len(nums) - 1
+        
+        while left < right:
+            total = nums[left] + nums[right]
+            
+            if total == 0:
+                return max(nums[left], -nums[left])
+            elif total < 0:
+                left += 1
             else:
-                if -1*i in seen:
-                    maxim = max(abs(i), maxim)
-                seen.add(i)
-        if maxim ==float("-inf"):
-            return -1
-        else:
-            return maxim
+                right -= 1
+        
+        return -1
