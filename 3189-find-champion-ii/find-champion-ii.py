@@ -1,4 +1,3 @@
-from collections import defaultdict
 
 class Solution:
     def findChampion(self, n: int, edges: List[List[int]]) -> int:
@@ -8,10 +7,8 @@ class Solution:
             else:
                 return -1
         
-        graph = {}
+        graph = defaultdict(list)
         for u, v in edges:
-            if u not in graph:
-                graph[u] = []
             graph[u].append(v)
         
         def dfs(graph, visited, node):
