@@ -2,10 +2,8 @@ class Solution:
     def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
         def find_diff(i, j):
             num = nums1.copy()
-            num[i] = "inf"
-            num[j] = "inf"
-            num.remove("inf")
-            num.remove("inf")
+            num.pop(i)
+            num.pop(j-1)
             diff = nums2[0]-num[0]
             for a, b in zip(num,nums2):
                 if diff !=b-a:
