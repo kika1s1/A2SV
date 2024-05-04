@@ -1,12 +1,8 @@
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        mod = 2047
-        while b:
-            a = a & mod
-            b = b & mod
-            Xor = (a^b)
-            And = a&b
-            a = Xor
-            b= (And<<1)
-
-        return a if a<1024 else a|~mod
+        max_int, mask = 0x7FFFFFFF, 0xFFFFFFFF
+        
+        while b != 0:
+            a, b = (a ^ b) & mask, ((a & b) << 1) & mask
+        
+        return a if a <= max_int else ~(a ^ mask)
