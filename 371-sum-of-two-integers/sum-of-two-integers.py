@@ -1,4 +1,12 @@
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        # i did not used + indeed \U0001f601\U0001f601
-        return sum([a,b])
+        mod = 2047
+        while b:
+            a = a & mod
+            b = b & mod
+            Xor = (a^b)
+            And = a&b
+            a = Xor
+            b= (And<<1)
+
+        return a if a<1024 else a|~mod
