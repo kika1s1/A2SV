@@ -1,17 +1,21 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        
+        if not edges and destination == 0:
+            return True
         graph = defaultdict(list)
         for u, v in edges:
             graph[u].append(v)
             graph[v].append(u)
-        stack = [(source, set())]
-        while stack:
-            node, visited = stack.pop()
-            if node == destination:
-                return True
-            visited.add(node)
-            for neighbor in graph[node]:
-                if neighbor not in visited:
-                    stack.append((neighbor, visited))
-        return False
+
+        def bfs(graph, source, destination, visited):
+            stack =[source]
+            while stack:
+                node = stack.pop()
+                for neighbour in graph[node]:
+                    if neighbour not in visited:
+                        visited.add(neighbour)
+                        if neighbour == destination:
+                            return True
+                        stack.append(neighbour)
+            return False
+        return bfs(graph, source, destination, set())
