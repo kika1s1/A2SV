@@ -1,40 +1,31 @@
 class Solution:
-    def findAllRecipes(self, recepies: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
-        dct=defaultdict(lambda :[])
-        indegree={}
-        n=len(recepies)
+    def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+        
+        supplies = set(supplies)
+        graph = {}
+        visited = set()
+        res = []
 
-        for i in recepies:
-            indegree[i]=0
+        for recipe, ing in zip(recipes, ingredients):
+            graph[recipe] = ing
 
-        for i in range(n):
-            for j in ingredients[i]:
-                indegree[j]=0
+        def DFS(node):
+            if node in visited:
+                return False
+            
+            if node not in graph:
+                return False
+            
+            visited.add(node)
+            for ing in graph[node]:
+                if ing not in supplies and not DFS(ing):
+                    return False
+            
+            supplies.add(node)
+            res.append(node)
+            return True
 
-        for i in range(n):
-            for j in ingredients[i]:
-                dct[j].append(recepies[i])
-                indegree[recepies[i]]+=1
+        for rep in recipes:
+            DFS(rep)
 
-        st=[]
-        for i in indegree:
-            if indegree[i]==0:
-                st.append(i)
-        flst=[]
-        ans=defaultdict(lambda :[])
-        while st:
-            x=st.pop(0)
-            for i in dct[x]:
-                ans[i].append(x)
-                indegree[i]-=1
-                if indegree[i]==0:
-                    st.append(i)
-            if x in recepies:
-                for k in ans[x]:
-                    if k not in supplies:
-                        break
-                else:
-                    flst.append(x)
-                    supplies.append(x)
-
-        return flst
+        return res
