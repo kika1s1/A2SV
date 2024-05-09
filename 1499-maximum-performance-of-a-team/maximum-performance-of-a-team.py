@@ -1,9 +1,6 @@
 class Solution:
     def maxPerformance(self, n: int, speed: List[int], efficiency: List[int], k: int) -> int:
-        eng = []
-        for eff, spd in zip(efficiency, speed):
-            eng.append([eff, spd])
-        eng.sort(reverse=True)
+        eng = sorted([[eff, spd] for eff, spd in zip(efficiency, speed)], key=lambda x:-x[0])
         res, speed = 0, 0
         minHeap = []
         for eff, spd in eng:
