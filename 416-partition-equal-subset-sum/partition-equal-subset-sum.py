@@ -5,7 +5,7 @@ class Solution:
             return False
         poss_sum = set([0])
         midd = total//2
-        for num in nums[::-1]:
+        for num in nums:
             new_set = set()
             for j in poss_sum:
                 new_set.add(num + j)
@@ -13,5 +13,4 @@ class Solution:
         if midd in poss_sum:
             return True
         else:
-            # print(poss_sum)
             return False
