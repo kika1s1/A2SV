@@ -6,33 +6,26 @@
 #         self.right = right
 class Solution:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
-        maxim = 0
-        memo = {}
-        def countZig(root, is_right, cnt):
-            nonlocal memo
-            if (root, is_right) in memo:
-                return memo[(root, is_right)]
-            if not root:
-                return 0
-            if is_right and root.right:
-                cnt = countZig(root.right, not is_right, cnt + 1)
+        if not root:
+            return 0
 
-            if not is_right and root.left:
-                cnt = countZig(root.left, not is_right, cnt + 1)
-            memo[(root, is_right)] = cnt
-            return memo[(root, is_right)]
+        longest = 0
+        stack = [(root, True, 0), (root, False, 0)]
 
-        def dfs(root):
-            nonlocal maxim
-            if not root:
-                return
-            cnt_left = countZig(root, True, 0)
-            cnt_right = countZig(root, False, 0)
-            maxim = max(maxim, cnt_left, cnt_right)
-            if root.right:
-                dfs(root.right)
-            if root.left:
-                dfs(root.left)
+        while stack:
+            node, is_right, count = stack.pop()
 
-        dfs(root)
-        return maxim
+            longest = max(longest, count)
+
+            if is_right:
+                if node.right:
+                    stack.append((node.right, False, count + 1))
+                if node.left:
+                    stack.append((node.left, True, 1))
+            else:
+                if node.left:
+                    stack.append((node.left, True, count + 1))
+                if node.right:
+                    stack.append((node.right, False, 1))
+
+        return longest
