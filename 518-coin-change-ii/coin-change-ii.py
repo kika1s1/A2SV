@@ -1,20 +1,22 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
-        memo = {}
-        return self.coinChangeRecursive(amount, coins, 0, memo)
-    
-    def coinChangeRecursive(self, amount: int, coins: List[int], index: int, memo: dict) -> int:
-        if amount == 0:
-            return 1
-        if amount < 0 or index >= len(coins):
-            return 0
-        
-        if (amount, index) in memo:
-            return memo[(amount, index)]
-        
-        count = 0
-        count += self.coinChangeRecursive(amount - coins[index], coins, index, memo)
-        count += self.coinChangeRecursive(amount, coins, index + 1, memo)
-        
-        memo[(amount, index)] = count
-        return count
+        # memo = {}
+        # def changeCoin(amount, index, memo):
+        #     if amount == 0:
+        #         return 1
+        #     if amount < 0 or index >= len(coins):
+        #         return 0
+        #     if (amount, index) in memo:
+        #         return memo[(amount, index)]
+        #     coin = 0
+        #     coin +=changeCoin(amount-coins[index], index, memo)
+        #     coin +=changeCoin(amount, index + 1, memo)
+        #     memo[(amount, index)] = coin
+        #     return memo[(amount, index)]
+        # return changeCoin(amount, 0, memo)
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        for c in coins:
+            for i in range(amount-c+1):
+                dp[c+i] +=dp[i]
+        return dp[amount]
