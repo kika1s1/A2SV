@@ -1,20 +1,28 @@
+from typing import List
+
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        if len(matrix) == 1:
-            return matrix[0][0]
-        n = len(matrix)
-        dp = [[0] * n for _ in range(n)]
-        dp = matrix.copy() 
-        for i in range(n - 2, -1, -1):
-            for j in range(n):
-                min_path = dp[i + 1][j]
-                if j > 0:
-                    min_path = min(min_path, dp[i + 1][j - 1])
-                if j < n - 1:
-                    min_path = min(min_path, dp[i + 1][j + 1])
-                dp[i][j] += min_path
-
-        result = float('inf')
-        for num in dp[0]:
-            result = min(result, num)
-        return result
+        ROWS, COLS = len(matrix), len(matrix[0])
+        memo = {}
+        def dfs(i, j):
+            if j < 0 or j >= COLS:
+                return float('inf')
+            if i == ROWS - 1:
+                return matrix[i][j]
+            
+            if (i, j) in memo:
+                return memo[(i, j)]
+            
+            down = dfs(i + 1, j)
+            left = dfs(i + 1, j - 1)
+            right = dfs(i + 1, j + 1)
+            
+            memo[(i, j)] = matrix[i][j] + min(down, left, right)
+            return memo[(i, j)]
+        
+        minim = float('inf')
+        
+        for j in range(COLS):
+            minim = min(minim, dfs(0, j))
+        
+        return minim
