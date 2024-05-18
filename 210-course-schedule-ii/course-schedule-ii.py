@@ -1,32 +1,23 @@
-from typing import List
-from collections import deque
-
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        graph = [[] for _ in range(numCourses)]
-        in_degrees = [0] * numCourses
-        
-        for prerequisite in prerequisites:
-            course, prerequisite_course = prerequisite
-            graph[prerequisite_course].append(course)
-            in_degrees[course] += 1
-        
+        graph = defaultdict(list)
+        incoming = [0 for i in range(numCourses)]
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            incoming[course] +=1
         queue = deque()
         for course in range(numCourses):
-            if in_degrees[course] == 0:
+            if incoming[course] == 0:
                 queue.append(course)
-        
         order = []
         while queue:
-            prerequisite_course = queue.popleft()
-            order.append(prerequisite_course)
-            
-            for course in graph[prerequisite_course]:
-                in_degrees[course] -= 1
-                if in_degrees[course] == 0:
-                    queue.append(course)
-        
+            course = queue.popleft()
+            order.append(course)
+            for neighbour in graph[course]:
+                incoming[neighbour] -=1
+                if incoming[neighbour] == 0:
+                    queue.append(neighbour)
         if len(order) != numCourses:
             return []
-        
         return order
+
