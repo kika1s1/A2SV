@@ -1,16 +1,16 @@
 class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
-        ans = 0
-        count = 0
+        if len(nums) < 3:
+            return 0
+        memo = [0] * len(nums)
+        res = 0
+        for i in range(2, len(nums)):
+            if nums[i] - nums[i-1] == nums[i-1] - nums[i-2]:
+                memo[i] = memo[i-1] + 1
+                res+= memo[i]
+        
+        return res
+            
 
-        for r in range(2, len(nums)):
-            diff1 = nums[r] - nums[r-1]
-            diff2 = nums[r-1] - nums[r-2]
 
-            if diff1 == diff2:
-                count += 1
-            else:
-                ans = count * (count + 1) // 2 + ans
-                count = 0
-
-        return count * (count + 1) // 2 + ans
+        
