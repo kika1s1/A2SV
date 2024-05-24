@@ -16,31 +16,33 @@ class Trie:
                 curr.children[index] = self.TrieNode()
             curr = curr.children[index]
         curr.is_end = True
+    def InsertAll(self, words, k):
+        for k in range(k):
+            self.insert(words[k])
+    def comman_prefix(self, word):
+        curr = self.root
+        ans = ""
+        for c in word:
+            index = ord(c)-ord("a")
+            if not curr.children[index] or curr.children.count(None) != 25:
+                return ans
+            ans +=c
+            curr = curr.children[index]
+        return ans
+    
 
-    def countChildren(self, node):
-        count = 0
-        for child in node.children:
-            if child:
-                count += 1
-        return count
+   
 
-    def walkTrie(self, root):
-        pCrawl = root
-        prefix = ""
-        while self.countChildren(pCrawl) == 1 and not pCrawl.is_end:
-            for i, child in enumerate(pCrawl.children):
-                if child:
-                    prefix += chr(ord("a") + i)
-                    pCrawl = child
-                    break
-        return prefix
-
-    def commonPrefix(self, arr):
-        for word in arr:
-            self.insert(word)
-        return self.walkTrie(self.root)
+    
 
 class Solution:
     def longestCommonPrefix(self, strs):
         trie = Trie()
-        return trie.commonPrefix(strs)
+        # maxim = float("inf")
+        trie.InsertAll(strs, len(strs))
+        small = "n"*202
+        for word in strs:
+            if len(word) < len(small):
+                small  = word
+        print(small)
+        return trie.comman_prefix(small)
