@@ -1,9 +1,7 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        n = len(nums)
-        b = n  
+        pos = set(nums)
+        for i in range(max(nums)+2):
+            if i not in pos:
+                return i
 
-        for i in range(n):
-            b ^= i ^ nums[i]
-
-        return b
