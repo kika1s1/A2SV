@@ -1,21 +1,22 @@
 class Solution:
     def specialArray(self, nums: List[int]) -> int:
-        n = len(nums)
-        l, r = 0, n
-        while(l<=r):
-            mid = (l+r)//2
-            count = 0 
-            for i in nums:
-                if(i>=mid):
-                    count +=1
-
-            if (count == mid):
-                return mid
-            elif count > mid:
-                l = mid + 1
-            else : 
-                r = mid - 1
-
-        return -1            
+        g_equal = []
+        l = len(nums)
+        for i in range(l+1):
+            val = i
+            cnt = 0
+            for j in range(l):
+                if i <=nums[j]:
+                    cnt +=1
+            g_equal.append(cnt)
+        for i in g_equal:
+            val = i
+            cnt = 0
+            for j in range(l):
+                if val <=nums[j]:
+                    cnt +=1
+            if val ==cnt:
+                return val
+        return -1
 
 
