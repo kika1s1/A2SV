@@ -1,22 +1,17 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        l, r = 0, 2
-        if len(s) < 2:
-            return len(s)
+        visited = set()
         maxim = 0
-        while r <=len(s):
-            sub = s[l:r]
-            if len(sub) == len(set(sub)):
-                maxim = max(maxim, len(sub))
-                r +=1
-                if len(sub) == len(set(sub)):
-                    maxim = max(maxim, len(sub))
-                else:
-                    l+=1
-                maxim = max(maxim, len(sub))
+        l, r = 0, 0
+        length = len(s)
+
+        while r < length:
+            if s[r] not in visited:
+                visited.add(s[r])
+                r += 1
+                maxim = max(maxim, r - l)
             else:
-                l +=1
+                visited.discard(s[l])
+                l += 1
 
         return maxim
-            
-                
