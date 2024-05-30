@@ -1,10 +1,10 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        first_buy, first_sell = -prices[0], 0
-        second_buy, second_sell = -prices[0], 0
+        f_buy, f_sell = -prices[0], 0
+        s_buy, s_sell = -prices[0], 0
         for price in prices[1:]:
-            first_buy = max(first_buy, -price)
-            first_sell = max(first_sell, first_buy + price)
-            second_buy = max(second_buy, first_sell - price)
-            second_sell = max(second_sell, second_buy + price)
-        return second_sell
+            f_buy = max(f_buy, -price)
+            f_sell = max(f_sell, f_buy + price)
+            s_buy = max(s_buy, f_sell - price)
+            s_sell = max(s_sell, s_buy + price)
+        return s_sell
