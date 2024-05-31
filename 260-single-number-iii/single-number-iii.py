@@ -1,9 +1,16 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
-        hashTable = {}
-        for i in range(len(nums)):
-            if nums[i] not in hashTable:
-                hashTable[nums[i]] = 1
+        xor_all = 0
+        for num in nums:
+            xor_all ^= num
+        
+        set_bit = xor_all & -xor_all
+        unique1 = 0
+        unique2 = 0
+        for num in nums:
+            if num & set_bit:
+                unique1 ^= num
             else:
-                del hashTable[nums[i]]
-        return list(hashTable.keys())
+                unique2 ^= num
+        
+        return [unique1, unique2]
