@@ -1,8 +1,9 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
-        HashMap = Counter(nums)
-        ans = []
-        for i in HashMap:
-            if HashMap[i] == 1:
-                ans.append(i)
-        return ans
+        hashTable = {}
+        for i in range(len(nums)):
+            if nums[i] not in hashTable:
+                hashTable[nums[i]] = 1
+            else:
+                del hashTable[nums[i]]
+        return list(hashTable.keys())
