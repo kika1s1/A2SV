@@ -1,10 +1,14 @@
-class Solution(object):
-    def reverseString(self, s):
-        def helper(start, end):
-            if start >= end:
-                return
-            s[start], s[end] = s[end], s[start]
-            helper(start + 1, end - 1)
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
 
-        helper(0, len(s) - 1)
+        # s.reverse()
+        # return s
+        l, r  = 0 , len(s)-1
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l +=1
+            r -=1
         return s
