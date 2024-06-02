@@ -4,8 +4,6 @@ class Solution:
         for i in timeSeries:
             time_s.append(i+duration)
         ans = 0
-        print(timeSeries)
-        print(time_s)
         for i in range(len(time_s)):
             if i ==0:
                 ans +=time_s[i]-timeSeries[i]
