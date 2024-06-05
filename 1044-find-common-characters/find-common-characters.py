@@ -1,7 +1,22 @@
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
-        res = Counter(words[0])
-        for i in words:
-            res &= Counter(i)
-        return list(res.elements())
+        cnt = [Counter(word) for word in words]
+        ans = []
+        for alphabet in cnt[0]:
+            isExist  = True
+            minim = float("inf")
+            for i in range(len(words)):
+                if alphabet not in cnt[i]:
+                    isExist = False
+                else:
+                    minim = min(minim, cnt[i][alphabet])
+            if isExist:
+                for i in range(minim):
+                    ans.append(alphabet)
+        return ans
+
+
+
+
+
         
