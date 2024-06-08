@@ -1,9 +1,13 @@
 class Solution:
     def sumOfTheDigitsOfHarshadNumber(self, x: int) -> int:
-        s = str(x)
+        n = x
         t = 0
-        for i in s:
-            t +=int(i)
-        if x%t == 0:
-            return t
-        return -1
+
+        while n > 9:
+            r = x%10
+            n = n//10
+            
+            t +=r
+        t +=n
+        return t if x%t == 0 else -1
+        
