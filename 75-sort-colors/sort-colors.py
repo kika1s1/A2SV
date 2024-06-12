@@ -3,8 +3,12 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums)):
-            for j in range(len(nums)-1-i):
-                if nums[j] > nums[j+1]:
-                    nums[j], nums[j+1] = nums[j+1], nums[j]
-        return nums
+        freq=[0]*3
+        for x in nums: 
+            freq[x]+=1
+        count=0
+        for x in range(3):
+            nums[count:count+freq[x]] = [x]*freq[x]
+            count+= freq[x]
+
+        
