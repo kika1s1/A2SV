@@ -1,19 +1,20 @@
-# @kika1s1
 class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
-        res = []
-        def backtrack(i, curr, res):
-            if i == len(curr):
-                res.append(''.join(curr))
+        results = []
+        
+        def backtrack(index, path):
+            if index == len(s):
+                results.append("".join(path))
                 return
-            if curr[i].isalpha():
-                curr[i] = chr(ord(curr[i]) ^ 32) 
-                # this toggle the case lower  tp upper and vs
-                backtrack(i + 1, curr, res)
-                curr[i] = chr(ord(curr[i]) ^ 32)
-                # same with chr(ord(curr[i]) ^ (1 << 5)) 
-                # same with curr[i].swapcase()
-                
-            backtrack(i + 1, curr, res)
-        backtrack(0, list(s), res)
-        return res
+            
+            path.append(s[index])
+            backtrack(index + 1, path)
+            path.pop()
+            
+            if s[index].isalpha():
+                path.append(s[index].swapcase())
+                backtrack(index + 1, path)
+                path.pop()
+        
+        backtrack(0, [])
+        return results
