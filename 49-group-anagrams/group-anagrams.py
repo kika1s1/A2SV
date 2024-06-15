@@ -1,16 +1,11 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        HashMap = {}
-        ans = []
-        for n in strs:
-            name = "".join(sorted(list(n)))
-
-            if name in HashMap:
-                HashMap[name].append(n)
+        maped = defaultdict()
+        for word in strs:
+            sor = sorted(list(word))
+            sor = "".join(sor)
+            if sor not in maped:
+                maped[sor] = [word]
             else:
-                HashMap[name] = [n]
-        for i in HashMap.values():
-            ans.append(i)
-        return ans
-        
-            
+                maped[sor].append(word)
+        return (maped.values())
