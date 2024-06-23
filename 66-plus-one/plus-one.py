@@ -1,14 +1,14 @@
-class Solution(object):
-    def plusOne(self, digits):
-        """
-        :type digits: List[int]
-        :rtype: List[int]
-        """
+class Solution:
+    def plusOne(self, nums: List[int]) -> List[int]:
+        r = len(nums)-1
+        while r >= 0:
 
-        for i in range(len(digits)-1, -1, -1):
-            if digits[i] == 9:
-                digits[i] = 0
+            if nums[r] == 9:
+                nums[r] = 0
+                r -=1
             else:
-                digits[i] = digits[i] + 1
-                return digits
-        return [1] + digits 
+                nums[r] +=1
+                return nums
+        nums.insert(0, 1)
+        return nums
+            
