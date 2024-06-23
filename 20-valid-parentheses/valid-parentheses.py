@@ -1,21 +1,15 @@
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+class Solution:
+    def isValid(self, s: str) -> bool:
+        close = {"(":")", "[":"]", "{":"}"}
         stack = []
-        matches = {")": "(", "]": "[", "}": "{"}
         for i in s:
-            if len(stack) == 0 and i in matches:
-                return False
-            elif i not in matches:
+            if i in close:
                 stack.append(i)
             else:
-                if stack[-1] == matches[i]:
+                if stack and close[stack[-1]] == i:
                     stack.pop()
                 else:
                     return False
-        return len(stack) == 0
-            
-       
+
+
+        return len(stack) ==0
