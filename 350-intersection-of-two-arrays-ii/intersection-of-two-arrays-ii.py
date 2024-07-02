@@ -6,15 +6,12 @@ class Solution(object):
         j = 0
         output = []
         while i < len(sortedArr1) and j < len(sortedArr2):
-        
             if sortedArr1[i] < sortedArr2[j]:
                 i += 1
-          
             elif sortedArr2[j] < sortedArr1[i]:
                 j += 1
-            
             else:
                 output.append(sortedArr1[i])
                 i += 1
                 j += 1
-        return output      
+        return output       
