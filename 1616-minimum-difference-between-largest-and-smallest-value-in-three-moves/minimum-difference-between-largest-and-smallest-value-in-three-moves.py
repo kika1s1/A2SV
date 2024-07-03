@@ -1,16 +1,12 @@
-class Solution(object):
-    def minDifference(self, nums):
-        if len(nums) <= 3:
+class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        nums=sorted(nums)
+        print(nums)
+        if len(nums)<=4:
             return 0
+        res= 1e30
+        for i in range(4):
+            res= min(res, nums[len(nums)-i-1]- nums[3-i])
+        return res
             
-        nums.sort()
-        ans = float('inf')
-        
-        ans = min(ans, nums[-1] - nums[3])
-
-        ans = min(ans, nums[-4] - nums[0])
-
-        ans = min(ans, nums[-2] - nums[2])
-
-        ans = min(ans, nums[-3] - nums[1])
-        return ans
+            
