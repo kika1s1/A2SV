@@ -1,19 +1,16 @@
-from typing import List
-
 class Solution:
     def luckyNumbers(self, matrix: List[List[int]]) -> List[int]:
-        ans = []
-        
+        if not matrix:
+            return []
+
         R, C = len(matrix), len(matrix[0])
-        
-        row_mins = [min(row) for row in matrix]
-        
-        col_maxs = [max(col) for col in zip(*matrix)]
-        
-        for i in range(R):
-            for j in range(C):
-                val = matrix[i][j]
-                if val == row_mins[i] and val == col_maxs[j]:
-                    ans.append(val)
-                    
-        return ans
+        result = []
+
+        min_row_values = [min(row) for row in matrix]
+
+        for j in range(C):
+            max_col_value = max(matrix[i][j] for i in range(R))
+            if max_col_value in min_row_values:
+                result.append(max_col_value)
+
+        return result
