@@ -1,7 +1,7 @@
 func containsDuplicate(nums []int) bool {
-    counter := make(map[int]int)
+    var counter = make(map[int]int)
     for _, num := range nums {
-        counter[num]++
+        counter[num] +=1
         if counter[num] > 1 {
             return true
         }
