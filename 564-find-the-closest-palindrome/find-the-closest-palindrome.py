@@ -1,45 +1,25 @@
 class Solution:
-    def convert(self, num: int) -> int:
-        s = str(num)
-        n = len(s)
-        l, r = (n - 1) // 2, n // 2
-        s_list = list(s)
-        while l >= 0:
-            s_list[r] = s_list[l]
-            r += 1
-            l -= 1
-        return int("".join(s_list))
-
-    def next_palindrome(self, num: int) -> int:
-        left, right = 0, num
-        ans = float("-inf")
-        while left <= right:
-            mid = (right - left) // 2 + left
-            palin = self.convert(mid)
-            if palin < num:
-                ans = palin
-                left = mid + 1
-            else:
-                right = mid - 1
-        return ans
-
-    def previous_palindrome(self, num: int) -> int:
-        left, right = num, int(1e18)
-        ans = float("-inf")
-        while left <= right:
-            mid = (right - left) // 2 + left
-            palin = self.convert(mid)
-            if palin > num:
-                ans = palin
-                right = mid - 1
-            else:
-                left = mid + 1
-        return ans
-
     def nearestPalindromic(self, n: str) -> str:
-        num = int(n)
-        a = self.next_palindrome(num)
-        b = self.previous_palindrome(num)
-        if abs(a - num) <= abs(b - num):
-            return str(a)
-        return str(b)
+        half = n[:len(n)//2] if len(n)%2==0 else n[:len(n)//2+1]
+        first = half+half[::-1] if len(n)%2==0 else half+half[:-1][::-1]
+        tmp = str(int(half)-1)
+        second = tmp+tmp[::-1] if len(n)%2==0 else tmp+tmp[:-1][::-1]
+        tmp = str(int(half)+1)
+        third = tmp+tmp[::-1] if len(n)%2==0 else tmp+tmp[:-1][::-1]
+        fourth = "9"*(len(n)-1)
+        fifth = "1"+"0"*max(0, len(n)-1)+"1"
+        
+        proposals = [first, second, third, fourth, fifth]
+        min_diff = 10**10
+        ans = ""
+        for p in proposals:
+            if p == n or p == "":
+                continue
+            else:
+                diff = abs(int(p) - int(n))
+                if diff < min_diff:
+                    ans = p
+                    min_diff = diff
+                elif diff == min_diff and int(p)<int(ans):
+                    ans = p
+        return ans
