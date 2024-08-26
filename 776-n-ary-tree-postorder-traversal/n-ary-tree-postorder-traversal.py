@@ -17,7 +17,6 @@ class Solution:
                 return 
             for node in root.children:
                 dfs(node)
-                ans.append(node.val)
+            ans.append(root.val)
         dfs(root)
-        ans.append(root.val)
         return ans
