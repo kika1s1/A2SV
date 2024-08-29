@@ -1,6 +1,5 @@
 class Solution:
     def removeStones(self, stones: List[List[int]]) -> int:
-        #
         parent = {}
         row = collections.defaultdict(list)
         col = collections.defaultdict(list)
