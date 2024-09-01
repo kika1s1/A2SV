@@ -1,10 +1,16 @@
 class Solution:
     def passThePillow(self, n: int, time: int) -> int:
-        current_position = 1
-        direction = 1 
-        for _ in range(1,time+1):
-            current_position += direction
-            if current_position == 1 or current_position == n :
-                direction = -direction
-        
-        return current_position
+        p = 1
+        inc = True
+        for i in range(time):
+            if inc and p < n:
+                p +=1
+            elif not inc and p > 1:
+                p -=1
+            else:
+                if inc:
+                    p -=1
+                else:
+                    p +=1
+                inc = not inc
+        return p
