@@ -1,7 +1,15 @@
 class Solution:
-    def dividePlayers(self, A: List[int]) -> int:
-        A.sort()
-        n = len(A)
-        a = [A[i]+A[n-i-1] for i in range(n//2)]
-        if len(set(a)) != 1: return -1
-        return sum(A[i]*A[n-i-1] for i in range(n//2)) 
+    def dividePlayers(self, skill: List[int]) -> int:
+        skill.sort()
+        l, r = 0, len(skill)-1
+        prod = 0
+        twoSum = skill[0] + skill[-1]
+        while l <= r:
+            if twoSum != skill[l] + skill[r]:
+                return -1
+            else:
+                prod +=(skill[l] * skill[r])
+            l +=1
+            r -=1
+        return prod
+        
