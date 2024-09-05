@@ -12,6 +12,5 @@ class Solution:
                 ans = max(ans, total/k)
                 total +=nums[i]
                 total -=nums[i-k]
-                ans = max(ans, total/k)
         ans = max(ans, total/k)
         return ans
