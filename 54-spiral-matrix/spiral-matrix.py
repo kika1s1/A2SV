@@ -1,26 +1,20 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        xmin = -1
-        xmax = len(matrix)
-        ymin = -1
-        ymax = len(matrix[0])
-        x = y = 0
-        res = [matrix[0][0]]
+        if not matrix or not matrix[0]:
+            return []
+        visited = set()
+        queue = deque([(0, 1), (1, 0), (0, -1), (-1, 0)])
+        ans = []
+        R, C = len(matrix), len(matrix[0])
+        r, c, d = 0, 0, 0
+        for _ in range(R * C):
+            ans.append(matrix[r][c])
+            visited.add((r, c))
+            nr, nc = r + queue[d][0], c + queue[d][1]
+            if not (0 <= nr < R and 0 <= nc < C and (nr, nc) not in visited):
+                d = (d + 1) % 4
+                nr, nc = r + queue[d][0], c + queue[d][1]
+            r, c = nr, nc
+            
 
-        while xmin <= xmax and ymin <= ymax:
-            for i, direction in enumerate([[0,1],[1,0],[0,-1],[-1,0]]):
-                while xmin < x + direction[0] < xmax and ymin < y + direction[1] < ymax:
-                    x += direction[0]
-                    y += direction[1]
-                    res.append(matrix[x][y])
-                if i == 0:
-                    xmin += 1
-                elif i == 1:
-                    ymax -= 1
-                elif i == 2:
-                    xmax -= 1
-                elif i == 3:
-                    ymin += 1
-                if xmin + 1 == xmax or ymin + 1 == ymax:
-                    break
-        return res
+        return ans
