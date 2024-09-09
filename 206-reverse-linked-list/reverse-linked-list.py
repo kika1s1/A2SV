@@ -1,15 +1,15 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def reverseList(self, head):
-        before = None
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dum = ListNode()
         while head:
-            after = head.next
-            head.next = before
-            before = head
-            head = after
-
-        return before
+            new_node = ListNode(head.val)
+            head = head.next
+            new_node.next = dum.next
+            dum.next = new_node
+            
+        return dum.next
