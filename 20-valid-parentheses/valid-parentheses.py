@@ -1,15 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        close = {"(":")", "[":"]", "{":"}"}
+        map_with_close = { ")":"(", "}":"{", "]":"["}
         stack = []
-        for i in s:
-            if i in close:
-                stack.append(i)
+        for char in s:
+            if char not in map_with_close:
+                stack.append(char)
             else:
-                if stack and close[stack[-1]] == i:
+                if stack and stack[-1] == map_with_close[char]:
                     stack.pop()
                 else:
                     return False
-
-
-        return len(stack) ==0
+        return len(stack) == 0
+        
