@@ -1,11 +1,9 @@
 class DataStream:
 
     def __init__(self, value: int, k: int):
-        self.nums = []
         self.length = k
         self.num = value
         self.cnt = 0
-        self.stack = []
         
 
     def consec(self, num: int) -> bool:
