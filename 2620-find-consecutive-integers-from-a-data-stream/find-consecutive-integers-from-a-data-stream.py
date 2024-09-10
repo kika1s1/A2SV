@@ -1,23 +1,25 @@
 class DataStream:
 
     def __init__(self, value: int, k: int):
-        self.k = k
-        self.items = []
-        self.value = value
+        self.nums = []
+        self.length = k
+        self.num = value
         self.cnt = 0
-    def consec(self, num: int) -> bool: 
-        if self.value == num:
+        self.stack = []
+        
+
+    def consec(self, num: int) -> bool:
+        if num == self.num:
             self.cnt +=1
+            if self.cnt >=self.length:
+                return True
+            return False
         else:
             self.cnt = 0
-        if self.cnt >=self.k:
-            return True
-        return False
+            if self.cnt >=self.length:
+                return True
+            return False
 
-        # self.items.append(num)
-        # if len(self.items) < self.k:
-        #     return False
-        # return len(set(self.items[-self.k:])) == 1 and self.items[-1] == num
         
 
 
