@@ -1,4 +1,4 @@
 class Solution:
     def minBitFlips(self, start: int, goal: int) -> int:
-        diff = start ^ goal
-        return diff.bit_count()
+        num = start ^ goal
+        return num.bit_count()
