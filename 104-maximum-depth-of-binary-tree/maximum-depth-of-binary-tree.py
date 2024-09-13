@@ -8,15 +8,16 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        maxim = 0
-        def depth(root, cnt):
-            nonlocal maxim
-            if not root:
-                return 
-            maxim = max(cnt, maxim)
-            if root.left:
-                depth(root.left, cnt+1)
-            if root.right:
-                depth(root.right, cnt +1)
-            return maxim
-        return depth(root, 1)
+        depth = 0
+        queue = deque([root])
+        while queue:
+            depth +=1
+            level = len(queue)
+            for i in range(level):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return depth
+
