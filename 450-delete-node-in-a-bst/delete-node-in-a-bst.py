@@ -11,22 +11,21 @@ class Solution:
             while current.left:
                 current = current.left
             return current
-
-        def delNode(root, key):
+        def deleteNode(root, key):
             if not root:
                 return root
-            if key < root.val:
-                root.left = delNode(root.left, key)
-            elif key > root.val:
-                root.right = delNode(root.right, key)
+            if root.val > key:
+                root.left = deleteNode(root.left, key)
+            elif root.val < key:
+                root.right = deleteNode(root.right, key)
             else:
                 if not root.left:
                     return root.right
                 elif not root.right:
                     return root.left
-
-                temp = findMinOfRight(root.right)
-                root.val = temp.val
-                root.right = delNode(root.right, temp.val) 
+                else:
+                    temp = findMinOfRight(root.right)
+                    root.val = temp.val
+                    root.right = deleteNode(root.right, temp.val)
             return root
-        return delNode(root, key)
+        return deleteNode(root, key)
