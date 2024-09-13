@@ -6,16 +6,16 @@
 #         self.right = right
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        results = []
-
-        def traverse(current_node):
-            if current_node is None:
+        ans = []
+        def pre(root):
+            if not root:
                 return 
-            results.append(current_node.val)
-            if current_node.left is not None:
-                traverse(current_node.left)
-            if current_node.right is not None:
-                traverse(current_node.right)
 
-        traverse(root)
-        return results
+            ans.append(root.val)
+            if root.left:
+                pre(root.left)
+            if root.right:
+                pre(root.right)
+            return ans
+        return pre(root)
+        
