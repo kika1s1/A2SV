@@ -10,9 +10,8 @@ class Solution:
                 ans = length
             elif num == maxim:
                 length +=1
-                ans = max(ans, length)
             else:
-                ans = max(ans, length)
                 length = 0
+            ans = max(ans, length)
         return ans
 
