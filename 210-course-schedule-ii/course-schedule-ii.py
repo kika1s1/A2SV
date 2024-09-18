@@ -1,23 +1,23 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        graph = defaultdict(list)
-        incoming = [0 for i in range(numCourses)]
-        for course, pre in prerequisites:
-            graph[pre].append(course)
-            incoming[course] +=1
+        graph = [[] for _ in range(numCourses)]
+        in_degrees = [0] * numCourses
+        for course, prerequisite in prerequisites:
+            graph[prerequisite].append(course)
+            in_degrees[course] +=1
         queue = deque()
         for course in range(numCourses):
-            if incoming[course] == 0:
+            if in_degrees[course] == 0:
                 queue.append(course)
         order = []
         while queue:
-            course = queue.popleft()
-            order.append(course)
-            for neighbour in graph[course]:
-                incoming[neighbour] -=1
-                if incoming[neighbour] == 0:
-                    queue.append(neighbour)
+            prerequisite = queue.popleft()
+            order.append(prerequisite)
+            for course in graph[prerequisite]:
+                in_degrees[course] -=1
+                if in_degrees[course] == 0:
+                    queue.append(course)
         if len(order) != numCourses:
             return []
         return order
-
+                
