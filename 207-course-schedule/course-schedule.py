@@ -1,30 +1,24 @@
-from collections import defaultdict, deque
-
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(list)
-        in_degree = [0] * numCourses
-
-        # Construct the graph and calculate in-degrees
-        for course, prereq in prerequisites:
-            graph[prereq].append(course)
-            in_degree[course] += 1
-
-        # Initialize a queue with courses having no prerequisites
-        queue = deque(course for course in range(numCourses) if in_degree[course] == 0)
-        completed_courses = 0
-
-        # Topological sorting
+        graph = [[] for i in range(numCourses)]
+        incoming = [0 for i in range(numCourses)]
+        queue = deque()
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            incoming[course] +=1
+        queue = deque()
+        for course in range(numCourses):
+            if incoming[course] == 0:
+                queue.append(course)
+        order = []
         while queue:
-            course = queue.popleft()
-            completed_courses += 1
-
-            # Decrease in-degree of adjacent courses
-            for next_course in graph[course]:
-                in_degree[next_course] -= 1
-                # If in-degree becomes 0, add to queue
-                if in_degree[next_course] == 0:
-                    queue.append(next_course)
-
-        # If all courses can be completed, return True
-        return completed_courses == numCourses
+            preq = queue.popleft()
+            order.append(preq)
+            for course in graph[preq]:
+                incoming[course] -=1
+                if  incoming[course] == 0:
+                    queue.append(course)
+        if len(order) != numCourses:
+            return False
+        return True
+                
