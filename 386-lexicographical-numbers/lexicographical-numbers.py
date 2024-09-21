@@ -1,26 +1,15 @@
-# class Solution:
-#     def lexicalOrder(self, n: int) -> List[int]:
-#         heap = []
-#         for i in range(1,n+1):
-#             heappush(heap, str(i))
-#         ans = []
-#         while heap:
-#             ans.append(int(heappop(heap)))
-#         return ans
-
-
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        ans = []
-        
-        def recursive(value):
-            if len(ans) >= n:
-                return
-            ans.append(value)
-            if (value * 10) <= n:
-                recursive(value * 10)
-            if value + 1 <= n and int(str(value)[-1]) < 9:
-                recursive(value + 1)
-        recursive(1)
+        lexicographical_numbers = []
+        current_number = 1
 
-        return ans
+        for _ in range(n):
+            lexicographical_numbers.append(current_number)
+
+            if current_number * 10 <= n:
+                current_number *= 10
+            else:
+                while current_number % 10 == 9 or current_number >= n:
+                    current_number //= 10 
+                current_number += 1 
+        return lexicographical_numbers
