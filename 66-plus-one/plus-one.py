@@ -1,14 +1,15 @@
 class Solution:
-    def plusOne(self, nums: List[int]) -> List[int]:
-        r = len(nums)-1
-        while r >= 0:
-
-            if nums[r] == 9:
-                nums[r] = 0
-                r -=1
+    def plusOne(self, digits: List[int]) -> List[int]:
+        left = 0
+        N = len(digits)-1
+        for i in range(len(digits)):
+            digit = digits[N-i] + 1
+            if digit < 10:
+                digits[N-i] = digit
+                return digits
             else:
-                nums[r] +=1
-                return nums
-        nums.insert(0, 1)
-        return nums
-            
+                digits[N-i] = 0
+        digits.insert(0, 1)
+        return digits
+
+
