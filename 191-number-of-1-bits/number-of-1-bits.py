@@ -1,3 +1,10 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
-        return len(str(bin(n)).replace("0","").replace("b",""))
+        cnt = 0
+        while n > 0:
+            rem = n % 2
+            if rem == 1:
+                cnt +=1
+            n //=2
+        return cnt
+
