@@ -1,12 +1,22 @@
 class Solution:
     def canArrange(self, arr: List[int], k: int) -> bool:
-        freq = [0]*k
+        rep = Counter()
         for num in arr:
-            num %=k
-            freq[num] +=1
-        if freq[0]%2 !=0:
-            return False
-        for i in range(1, (k//2)+1):
-            if freq[i] !=freq[k-i]:
-                return False
-        return True
+            mod = num % k
+            if mod == 0:
+                if mod  in rep:
+                    rep[mod] -=1
+                    if rep[mod] == 0:
+                        del rep[mod]
+                else:
+                    rep[mod] +=1
+            else:
+                diff = k - mod
+                if diff in rep:
+                    rep[diff] -=1
+                    if rep[diff] == 0:
+                        del rep[diff]
+                else:
+                    rep[mod] +=1
+        return True if len(rep) == 0 else False
+                
