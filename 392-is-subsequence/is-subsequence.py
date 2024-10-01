@@ -1,14 +1,22 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        dp = [{} for i in range(len(t) + 1)]
-        for i in range(len(t) - 1, -1, -1):
-            dp[i] = dp[i + 1].copy()
-            dp[i][t[i]] = i + 1
-        print(dp)
-        i = 0
-        for c in s:
-            if c in dp[i]:
-                i = dp[i][c]
-            else:
-                return False
-        return True
+        l, r = 0, 0
+        cnt = 0
+        S = len(s)
+        N = len(t)
+        for i in range(N):
+            l = i
+            while l < N and r < S:
+                if s[r] == t[l]:
+                    cnt +=1
+                    r +=1
+                    l +=1
+                else:
+                    l +=1
+            if cnt == S:
+                return True
+            cnt = 0
+            r = 0
+            
+        return True if s == t else False
+
