@@ -2,11 +2,10 @@ class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
         ans = []
         rank_index = {}
-        points = arr[:]
-        arr.sort()
+        sorted_arr = sorted(arr)
         rank = 0
         prev = None
-        for score in arr:
+        for score in sorted_arr:
             if prev == None:
                 prev = score
                 rank = 1
@@ -18,6 +17,6 @@ class Solution:
             else:
                 prev = score
                 rank_index[score] = rank
-        for point in points :
+        for point in arr :
             ans.append(rank_index[point])
         return ans
