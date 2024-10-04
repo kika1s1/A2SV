@@ -11,7 +11,7 @@ class Solution:
             ans.append(number)
             return ans == sorted(ans, reverse=True)
         p = 1
-        while n >= 0:
+        while n >= 9:
             if check(n):
                 return n
             else:
