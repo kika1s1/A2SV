@@ -1,6 +1,10 @@
 class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
-        dictRep = Counter(nums)
-        for i, value in dictRep.items():
-            if value == 1:
-                return i
+  def singleNumber(self, nums: List[int]) -> int:
+    ones = 0
+    twos = 0
+
+    for num in nums:
+      ones ^= (num & ~twos)
+      twos ^= (num & ~ones)
+
+    return ones
