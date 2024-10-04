@@ -2,8 +2,6 @@ class Solution:
     def monotoneIncreasingDigits(self, n: int) -> int:
         if n < 10:
             return n
-        if n ==10:
-            return 9
         def check(number):
             ans = []
             while number >= 10:
@@ -13,7 +11,7 @@ class Solution:
             ans.append(number)
             return ans == sorted(ans, reverse=True)
         p = 1
-        while n > 10:
+        while n >= 0:
             if check(n):
                 return n
             else:
