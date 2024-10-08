@@ -1,9 +1,13 @@
 class Solution:
     def minSwaps(self, s: str) -> int:
-        res, bal = 0, 0
+        stack = []
+        unbalanced = 0
         for ch in s:
-            bal += 1 if ch == '[' else -1
-            if bal == -1:
-                res += 1
-                bal = 1
-        return res
+            if ch == "[":
+                stack.append(ch)
+            else:
+                if stack:
+                    stack.pop()
+                else:
+                    unbalanced += 1
+        return (unbalanced + 1) // 2
