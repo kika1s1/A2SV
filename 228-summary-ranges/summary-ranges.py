@@ -1,22 +1,28 @@
 class Solution:
-    def summaryRanges(self, nums):
-        if not nums:
-            return []
-
-        ranges = []
-        start = nums[0]
-
-        for i in range(1, len(nums)):
-            if nums[i] != nums[i-1] + 1:
-                if start == nums[i-1]:
-                    ranges.append(str(start))
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        ans = []
+        N = len(nums)
+        if N <=1:
+            return [str(x) for x in nums] 
+        l, r = 0, 1
+        prev = nums[0]
+        while l < r < N:
+            if nums[l]+1 == nums[r]:
+                l +=1
+                r +=1
+            else:
+                if nums[l] == prev:
+                    ans.append(str(prev))
+                    prev = nums[l+1]
                 else:
-                    ranges.append(str(start) + "->" + str(nums[i-1]))
-                start = nums[i]
-
-        if start == nums[-1]:
-            ranges.append(str(start))
+                    ans.append(f"{prev}->{nums[l]}")
+                    prev = nums[l+1]
+                l +=1
+                r +=1
+        if prev == nums[N-1]:
+            ans.append(str(prev))
         else:
-            ranges.append(str(start) + "->" + str(nums[-1]))
+            ans.append(f"{prev}->{nums[N-1]}")
+            
 
-        return ranges
+        return ans
