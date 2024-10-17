@@ -1,13 +1,13 @@
 class Solution:
-
     def rob(self, nums: List[int]) -> int:
-        
-        
-        ans = [0] * len(nums)
-        for i in range(len(nums)):
-            if i-1 > 0:
-                ans[i] = nums[i] + max(ans[:i-1])
-            else:
-                ans[i] = nums[i]
-        
-        return max(ans)
+        N = len(nums)
+        if N == 1:
+            return nums[0]
+        if N == 2:
+            return max(nums[0], nums[1])
+        dp = [0]*N
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+        for i in range(2, N):
+            dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+        return dp[N-1]
