@@ -17,7 +17,7 @@ class Solution:
                     best = hash_index[s]
                     minim = s
                     r = mid -1
-                elif s < end:
+                else:
                     l = mid +1
             return best
         for start, end in intervals:
