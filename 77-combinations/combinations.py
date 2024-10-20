@@ -4,7 +4,6 @@ class Solution:
         def backtrack(index, curr, k):
             if len(curr) == k:
                 ans.append(curr[:])
-            if len(curr) > k:
                 return  
             for i in range(index, n+1):
                 curr.append(i)
