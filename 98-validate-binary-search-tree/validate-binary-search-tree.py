@@ -5,22 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        previous = -float("inf")
-        result = True
-
-        def inorder(node):
-            nonlocal previous, result
-            if not node or not result:
-                return
-
-            inorder(node.left)
-            if previous >= node.val:
-                result = False
-                return
-
-            previous = node.val
-            inorder(node.right)
-
-        inorder(root)
-        return result
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        
+        def dfs(node, lower=float('-inf'), upper=float('inf')):
+            if not node:
+                return True
+            if not (lower < node.val < upper):
+                return False
+            if not dfs(node.left, lower, node.val):
+                return False
+            if not dfs(node.right, node.val, upper):
+                return False
+            return True
+        return dfs(root)
