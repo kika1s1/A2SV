@@ -1,38 +1,34 @@
 class TrieNode:
     def __init__(self):
-        self.children = [None] * 26
-        self.is_end = False
+        self.children = {}
+        self.is_end_of_word = False
 
 class WordDictionary:
     def __init__(self):
         self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
-        curr = self.root
-        for chr in word:
-            index = ord(chr) - ord("a")
-            if not curr.children[index]:
-                curr.children[index] = TrieNode()
-            curr = curr.children[index]
-        curr.is_end = True
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
 
     def search(self, word: str) -> bool:
-        return self._search_in_node(word, self.root)
+        def dfs(node, i):
+            if i == len(word):
+                return node.is_end_of_word
+            if word[i] == ".":
+                return any(dfs(child, i + 1) for child in node.children.values())
+            if word[i] in node.children:
+                return dfs(node.children[word[i]], i + 1)
+            return False
+        
+        return dfs(self.root, 0)
 
-    def _search_in_node(self, word: str, node: TrieNode) -> bool:
-        curr = node
-        for i, c in enumerate(word):
-            if c != ".":
-                index = ord(c) - ord("a")
-                if not curr.children[index]:
-                    return False
-                curr = curr.children[index]
-            else:
-                for child in curr.children:
-                    if child and self._search_in_node(word[i + 1:], child):
-                        return True
-                return False
-        return curr.is_end
+        
+
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
