@@ -1,29 +1,26 @@
-class Solution(object):
-    def letterCombinations(self, digits):
-        counter = {
-    '2': 'abc',
-    '3': 'def',
-    '4': 'ghi',
-    '5': 'jkl',
-    '6': 'mno',
-    '7': 'pqrs',
-    '8': 'tuv',
-    '9': 'wxyz'
-}
-        c=len(digits)
-        if c==0:
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
             return []
-        if c==1:
-            return list(counter[digits[0]])
-        ff = [x + y for x in counter[digits[0]] for y in counter[digits[1]]]
-        if c == 2:
-            return ff
 
-        if c == 3:
-            ff = [x + y for x in ff for y in counter[digits[2]]]
+        phone_map = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz'
+        }
 
-        if c == 4:
-            fg = [x + y for x in counter[digits[2]] for y in counter[digits[3]]]
-            ff = [x + y for x in ff for y in fg]
+        def backtrack(combination, next_digits):
+            if len(next_digits) == 0:
+                output.append(combination)
+            else:
+                for letter in phone_map[next_digits[0]]:
+                    backtrack(combination + letter, next_digits[1:])
 
-        return ff
+        output = []
+        backtrack("", digits)
+        return output
