@@ -3,10 +3,6 @@ class Solution:
         stack = []
         cnt = []
         for char in s:
-            if cnt and cnt[-1] == k:
-                for i in range(k):
-                    stack.pop()
-                    cnt.pop()
             if not stack:
                 stack.append(char)
                 cnt.append(1)
@@ -16,7 +12,7 @@ class Solution:
             else:
                 stack.append(char)
                 cnt.append(1)
-        if cnt and cnt[-1] == k:
+            if cnt and cnt[-1] == k:
                 for i in range(k):
                     stack.pop()
                     cnt.pop()
