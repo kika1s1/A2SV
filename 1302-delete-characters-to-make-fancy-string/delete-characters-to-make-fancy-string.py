@@ -1,18 +1,18 @@
 class Solution:
     def makeFancyString(self, s: str) -> str:
-        top = 0
-        stack = []
-        cnt = 0
+        ans = ""
+        see = False
         for char in s:
-            if not stack:
-                top = 1
-                stack.append(char)
-            elif stack and stack[-1] == char and top >=2:
-                cnt +=1
-            elif stack and stack[-1] !=char:
-                top = 1
-                stack.append(char)
+            if not ans:
+                ans +=char
+            elif ans and ans[-1] != char:
+                ans +=char
+                see = False
+            elif ans and ans[-1] == char and not see:
+                see = True
+                ans +=char
             else:
-                top +=1
-                stack.append(char)
-        return "".join(stack)
+                continue
+            
+
+        return ans
