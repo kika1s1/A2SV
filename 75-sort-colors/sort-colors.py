@@ -3,12 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        freq=[0]*3
-        for x in nums: 
-            freq[x]+=1
-        count=0
-        for x in range(3):
-            nums[count:count+freq[x]] = [x]*freq[x]
-            count+= freq[x]
+        low, mid, high = 0, 0, len(nums)-1
+        while mid <=high:
+            if nums[mid] ==0:
+                nums[mid], nums[low] = nums[low], nums[mid]
+                mid +=1
+                low +=1
+            elif nums[mid] == 1:
+                mid +=1
+            else:
+                nums[mid], nums[high] =  nums[high], nums[mid]
+                high -=1
 
-        
+        return nums
