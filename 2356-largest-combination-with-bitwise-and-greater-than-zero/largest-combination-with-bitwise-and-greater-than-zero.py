@@ -1,9 +1,10 @@
 class Solution:
     def largestCombination(self, candidates: List[int]) -> int:
-        bit_similar = [0]*24
-        for num in candidates:
-            n = bin(num)[2:]
-            l  = num.bit_length()
-            for index, bit in enumerate(n):
-                bit_similar[23-l+1+index] +=int(bit)
-        return(max(bit_similar))
+        bit_count = [0] * 24
+        for i in range(24):
+            for num in candidates:
+                # Check if the i-th bit is set.
+                if (num & (1 << i)) != 0:
+                    bit_count[i] += 1
+
+        return max(bit_count)
