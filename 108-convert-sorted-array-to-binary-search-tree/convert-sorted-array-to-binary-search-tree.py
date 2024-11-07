@@ -16,5 +16,5 @@ class Solution:
             node.right = createBST(mid + 1, right)
             return node
             
-        return createBST(0, len(nums)-1)
+        return createBST(0, len(nums) -1)
                         
