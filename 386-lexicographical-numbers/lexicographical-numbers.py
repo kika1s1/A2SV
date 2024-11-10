@@ -1,15 +1,7 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
-        lexicographical_numbers = []
-        current_number = 1
-
-        for _ in range(n):
-            lexicographical_numbers.append(current_number)
-
-            if current_number * 10 <= n:
-                current_number *= 10
-            else:
-                while current_number % 10 == 9 or current_number >= n:
-                    current_number //= 10 
-                current_number += 1 
-        return lexicographical_numbers
+        ans = []
+        for num in range(1, n+1):
+            ans.append(num)
+        ans.sort(key=lambda x:str(x))
+        return ans
