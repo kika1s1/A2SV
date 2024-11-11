@@ -13,7 +13,7 @@ class Solution:
         for num in nums:
             l, r = 0, bisect_left(primes, num)-1
             if num == 1:
-                if ans and ans[-1] ==1:
+                if ans and ans[-1] >=1:
                     return False
                 ans.append(num)
                 continue
@@ -37,8 +37,6 @@ class Solution:
                     
             if num - primes[best] <= ans[-1] and ans[-1] >= num:
                 return False
-            
-
             ans.append(num if num - primes[best] <= ans[-1] else num - primes[best])
-        return ans == sorted(ans)
+        return True
         
