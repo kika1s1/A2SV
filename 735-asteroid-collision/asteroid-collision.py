@@ -1,18 +1,19 @@
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        
-        res = []
-
-        for a in asteroids:
-
-            while res and a < 0 < res[-1]:
-                if -a > res[-1]:
-                    res.pop()
-                    continue
-                elif -a == res[-1]:
-                    res.pop()
-                break
+        stack = []
+        for asteroid in asteroids:
+            if not stack:
+                stack.append(asteroid)
             else:
-                res.append(a)
-
-        return res
+                is_the_same = False
+                while stack and stack[-1] > 0  and  asteroid < 0:
+                    value = stack.pop()
+                    if abs(value) == abs(asteroid):
+                        is_the_same = True
+                        break
+                    else:
+                        if abs(value) > abs(asteroid):
+                            asteroid =  value
+                if not is_the_same:
+                    stack.append(asteroid)
+        return stack
