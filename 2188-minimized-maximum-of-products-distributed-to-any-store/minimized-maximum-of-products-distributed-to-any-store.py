@@ -9,7 +9,7 @@ class Solution:
                 else:
                     cnt +=1
             return cnt <= n and cnt <=(sum(quantities))
-        l, r  = 0, max(quantities)
+        l, r  = 1, max(quantities)
         best = r
         while l <=r:
             mid = (l+r)//2
