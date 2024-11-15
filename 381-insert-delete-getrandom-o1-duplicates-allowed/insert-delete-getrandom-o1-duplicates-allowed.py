@@ -12,9 +12,6 @@ class RandomizedCollection:
 
 
     def insert(self, val: int) -> bool:
-        """
-        Inserts a value to the collection. Returns true if the collection did not already contain the specified element.
-        """
         self.idx[val].add(len(self.lst))
         self.lst.append(val)
         return len(self.idx[val]) == 1
@@ -33,7 +30,5 @@ class RandomizedCollection:
 
 
     def getRandom(self) -> int:
-        """
-        Get a random element from the collection.
-        """
+    
         return choice(self.lst)
