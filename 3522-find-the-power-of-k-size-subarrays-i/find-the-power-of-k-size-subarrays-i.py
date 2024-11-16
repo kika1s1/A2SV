@@ -1,16 +1,17 @@
 class Solution:
     def resultsArray(self, nums: List[int], k: int) -> List[int]:
         if k == 1:
-            return nums[::k]
-        n = len(nums)
-        ans = []
-        for i in range(n - k + 1):
-            sub = (nums[i:i+k])
-            is_true = all(nums[j] - nums[j-1] == 1 for j in range(i+1, i+k))
-            # print(list(is_true))
-            if is_true:
-                ans.append(sub[-1])
+            return nums 
+
+        length = len(nums)
+        result = [-1] * (length - k + 1)
+        consecutive_count = 1  
+        for index in range(length - 1):
+            if nums[index] + 1 == nums[index + 1]:
+                consecutive_count += 1
             else:
-                ans.append(-1)
-            
-        return ans
+                consecutive_count = 1  
+            if consecutive_count >= k:
+                result[index - k + 2] = nums[index + 1]
+
+        return result
