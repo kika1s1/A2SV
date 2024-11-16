@@ -11,7 +11,8 @@ class Solution:
                 consecutive_count += 1
             else:
                 consecutive_count = 1  
-            if consecutive_count >= k:
+            if consecutive_count == k:
                 result[index - k + 2] = nums[index + 1]
+                consecutive_count -=1
 
         return result
