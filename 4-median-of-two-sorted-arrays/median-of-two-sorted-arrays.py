@@ -1,15 +1,30 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        """
-        I see leetcode account return median(sorted(nums1 + nums2)) 
-        but guys shame on us since it is hard question let try to write a little bit 
-        by ourselves \U0001f601\U0001f601
-        """
-        nums1.extend(nums2)
-        nums1.sort()
-        # print(nums1)
-        if len(nums1)%2 == 1:
-            return nums1[len(nums1)//2]
+        m, n = len(nums1), len(nums2)
+        p1, p2 = 0, 0
+
+        def get_min():
+            nonlocal p1, p2
+            if p1 < m and p2 < n:
+                if nums1[p1] < nums2[p2]:
+                    ans = nums1[p1]
+                    p1 += 1
+                else:
+                    ans = nums2[p2]
+                    p2 += 1
+            elif p2 == n:
+                ans = nums1[p1]
+                p1 += 1
+            else:
+                ans = nums2[p2]
+                p2 += 1
+            return ans
+
+        if (m + n) % 2 == 0:
+            for _ in range((m + n) // 2 - 1):
+                _ = get_min()
+            return (get_min() + get_min()) / 2
         else:
-            # print(nums1[(len(nums1)//2)-1], nums1[len(nums1)//2])
-            return ( nums1[(len(nums1)//2)-1] +  nums1[len(nums1)//2])/2
+            for _ in range((m + n) // 2):
+                _ = get_min()
+            return get_min()
