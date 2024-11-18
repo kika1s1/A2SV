@@ -1,7 +1,6 @@
 class Solution:
     def decrypt(self, code: List[int], k: int) -> List[int]:
         ans = []
-        double = code + code
         if k == 0:
             return [0] * len(code)
         for i in range(len(code)):
@@ -14,7 +13,7 @@ class Solution:
                 add = 0
                 i = len(code)+i
                 for b in range(i-(-1*k), i):
-                    add +=double[b]
+                    add +=code[b%len(code)]
                 ans.append(add)
 
 
