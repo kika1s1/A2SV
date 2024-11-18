@@ -1,13 +1,21 @@
 class Solution:
     def decrypt(self, code: List[int], k: int) -> List[int]:
-        result = [0] * len(code)
+        ans = []
+        double = code + code
         if k == 0:
-            return result
-        for i in range(len(result)):
-            if k > 0:
-                for j in range(i + 1, i + k + 1):
-                    result[i] += code[j % len(code)]
+            return [0] * len(code)
+        for i in range(len(code)):
+            if k >  0:
+                add = 0
+                for a in range(i+1, i+k+1):
+                    add += code[a%len(code)]
+                ans.append(add)
             else:
-                for j in range(i - abs(k), i):
-                    result[i] += code[(j + len(code)) % len(code)]
-        return result
+                add = 0
+                i = len(code)+i
+                for b in range(i-(-1*k), i):
+                    add +=double[b]
+                ans.append(add)
+
+
+        return ans
