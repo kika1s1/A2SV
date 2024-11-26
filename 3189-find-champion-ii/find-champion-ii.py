@@ -1,26 +1,22 @@
-
 class Solution:
     def findChampion(self, n: int, edges: List[List[int]]) -> int:
-        if len(edges) == 0:
-            if n == 1:
-                return 0
-            else:
-                return -1
-        
         graph = defaultdict(list)
         for u, v in edges:
             graph[u].append(v)
-        
-        def dfs(graph, visited, node):
-            visited.add(node)
-            for neighbour in graph.get(node, []):
-                if neighbour not in visited:
-                    dfs(graph, visited, neighbour)
-        
-        for u, v in edges:
+
+        def dfs(visited, current):
+            visited.add(current)
+            for neighbor in graph[current]:
+                if neighbor not in visited:
+                    dfs(visited, neighbor)
+
+        ans = []
+        for node in range(n):
             visited = set()
-            dfs(graph, visited, u)
+            dfs(visited, node)
             if len(visited) == n:
-                return u
-        
+                ans.append(node)
+
+        if len(ans) == 1:
+            return ans[0]
         return -1
