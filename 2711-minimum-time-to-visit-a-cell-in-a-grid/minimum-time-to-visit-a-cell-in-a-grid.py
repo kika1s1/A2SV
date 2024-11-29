@@ -10,7 +10,7 @@ class Solution:
         visited = [[False] * n for _ in range(m)]  
         
         while heap:
-            time, row, col = heapq.heappop(heap)
+            time, row, col = heappop(heap)
             
             if row == m - 1 and col == n - 1:
                 return time
@@ -24,12 +24,12 @@ class Solution:
                 
                 if 0 <= r < m and 0 <= c < n and not visited[r][c]:
                     if grid[r][c] <= time + 1:
-                        heapq.heappush(heap, (time + 1, r, c))
+                        heappush(heap, (time + 1, r, c))
                     else:
                         diff = grid[r][c] - time
                         if diff % 2 == 1:
-                            heapq.heappush(heap, (grid[r][c], r, c))
+                            heappush(heap, (grid[r][c], r, c))
                         else:
-                            heapq.heappush(heap, (grid[r][c] + 1, r, c))
+                            heappush(heap, (grid[r][c] + 1, r, c))
         
         return -1
