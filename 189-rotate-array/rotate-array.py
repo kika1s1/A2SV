@@ -3,5 +3,12 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        k = k%len(nums)
-        nums[:] = nums[-k:] + nums[:-k]
+        def reverse(l, r):
+            while l <= r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l +=1
+                r -=1
+        N = k %len(nums)
+        reverse(0, len(nums)-1)
+        reverse(0, N-1)
+        reverse(N, len(nums)-1)
