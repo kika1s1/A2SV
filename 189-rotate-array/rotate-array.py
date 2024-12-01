@@ -4,7 +4,7 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         def reverse(l, r):
-            while l <= r:
+            while l < r:
                 nums[l], nums[r] = nums[r], nums[l]
                 l +=1
                 r -=1
