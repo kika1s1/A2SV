@@ -1,7 +1,9 @@
 class Solution:
     def checkIfExist(self, arr: List[int]) -> bool:
-        for i in range(len(arr)):
-            double = arr[i]*2
-            if double in arr and arr.index(double) != i:
+        visited = set()
+        for num in arr:
+            if num*2 in visited or num/2 in visited:
                 return True
+            else:
+                visited.add(num)
         return False
