@@ -1,14 +1,11 @@
 class Solution:
     def addSpaces(self, s: str, spaces: List[int]) -> str:
-        ans = ""
-        mapWithIndex = {}
-        for i in spaces:
-            mapWithIndex[i] = s[i]
-
-        for i, j in enumerate(s):
-            if i in mapWithIndex:
-                ans += " "+j
+        ans = []
+        spaces = set(spaces)
+        for index, char in enumerate(s):
+            if index in spaces:
+                ans.append(" ")
+                ans.append(char)
             else:
-                ans += j
-
-        return ans
+                ans.append(char)
+        return "".join(ans)
