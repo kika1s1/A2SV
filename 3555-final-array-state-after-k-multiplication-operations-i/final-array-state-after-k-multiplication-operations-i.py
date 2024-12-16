@@ -1,9 +1,12 @@
 class Solution:
     def getFinalState(self, nums: List[int], k: int, multiplier: int) -> List[int]:
-        for j in range(k):
-            index = 0
-            for k in range(len(nums)):
-                if nums[k] < nums[index]:
-                    index = k
-            nums[index] = multiplier * nums[index]
-        return nums
+        heap = []
+        for i, num in enumerate(nums):
+            heappush(heap, (num, i))
+        for i in range(k):
+            num, index = heappop(heap)
+            heappush(heap, (num*multiplier, index))
+        ans = [0]*len(heap)
+        for num, index in heap:
+            ans[index] = num
+        return ans
