@@ -7,15 +7,17 @@
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         ans = []
-        def pre(root):
-            if not root:
-                return 
-
-            ans.append(root.val)
-            if root.left:
-                pre(root.left)
-            if root.right:
-                pre(root.right)
-            return ans
-        return pre(root)
-        
+        queue = deque([root])
+        while queue:
+            node = queue.popleft()
+            two = []
+            if node:
+                if node:
+                    ans.append(node.val)
+                if node.left:
+                    two.append(node.left)
+                if node.right:
+                    two.append(node.right)
+                for node in reversed(two):
+                    queue.appendleft(node)
+        return ans
