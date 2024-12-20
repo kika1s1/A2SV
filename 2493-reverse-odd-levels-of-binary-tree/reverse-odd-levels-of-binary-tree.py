@@ -26,7 +26,7 @@ class Solution:
         def build(index):
             if index >= len(result):  
                 return None
-            node = TreeNode(val=result[index])
+            node = TreeNode(result[index])
             node.left = build(2 * index + 1)
             node.right = build(2 * index + 2)
             
