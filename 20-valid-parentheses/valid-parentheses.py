@@ -1,14 +1,13 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        map_with_close = { ")":"(", "}":"{", "]":"["}
+        op = {")":"(", "}":"{", "]":"["}
         stack = []
-        for char in s:
-            if char not in map_with_close:
-                stack.append(char)
+        for chr in s:
+            if chr not in op:
+                stack.append(chr)
             else:
-                if stack and stack[-1] == map_with_close[char]:
+                if stack and stack[-1] == op[chr]:
                     stack.pop()
                 else:
                     return False
         return len(stack) == 0
-        
