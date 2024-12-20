@@ -1,25 +1,22 @@
 class RecentCounter:
 
     def __init__(self):
-        self.calls = []
-        self.start = 0
+        self.items = []
         
 
     def ping(self, t: int) -> int:
-        if not self.calls:
-            self.calls.append(t)
+        if not self.items:
+            self.items.append(t)
             return 1
-        else:
-            while self.start < len(self.calls) and   t - self.calls[self.start] > 3000:
-                self.start +=1
-            if self.start >= len(self.calls):
-                self.calls.append(t)
-                return 1
+        self.items.append(t)
+        down = self.items[-1] - 3000
+        cnt = 0
+        for num in self.items[::-1]:
+            if down <= num <= self.items[-1]:
+                cnt +=1
             else:
-                self.calls.append(t)
-                return len(self.calls) - self.start
-            
-
+                return cnt
+        return cnt
         
 
 
