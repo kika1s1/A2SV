@@ -1,25 +1,38 @@
 class Solution:
-    def leftmostBuildingQueries(self, a: List[int], q: List[List[int]]) -> List[int]:
-        n=len(a)
-        st=[]
-        res=[-1]*len(q)
-        q=[(q[i][0],q[i][1],i) for i in range(len(q))]
-        q.sort(key=lambda x: max(x[0],x[1]))
-        for i in range(n-1,-1,-1):
-            while q and max(q[-1][1],q[-1][0])==i:
-                x,y,pos=q.pop()
-                if x>y: x,y=y,x
-                if x==y or a[x]<a[y]: res[pos]=y; continue
-                if len(st)==0 or st[0][0]<=a[x]: continue
-                if st[-1][0]>a[x]: res[pos]=st[-1][1]; continue
-                lo,hi=0,len(st)-1
-                while lo<hi-1:
-                    md=(lo+hi)//2
-                    if st[md][0]>a[x]: lo=md
-                    else: hi=md
-                res[pos]=st[lo][1]
-            while st:
-                if a[i]>=st[-1][0]: st.pop()
-                else: break
-            st.append((a[i],i))
-        return res
+    def leftmostBuildingQueries(self, heights, queries):
+        mono_stack = []
+        result = [-1 for _ in range(len(queries))]
+        new_queries = [[] for _ in range(len(heights))]
+        for i in range(len(queries)):
+            a = queries[i][0]
+            b = queries[i][1]
+            if a > b:
+                a, b = b, a
+            if heights[b] > heights[a] or a == b:
+                result[i] = b
+            else:
+                new_queries[b].append((heights[a], i))
+
+        for i in range(len(heights) - 1, -1, -1):
+            mono_stack_size = len(mono_stack)
+            for a, b in new_queries[i]:
+                position = self.search(a, mono_stack)
+                if position < mono_stack_size and position >= 0:
+                    result[b] = mono_stack[position][1]
+            while mono_stack and mono_stack[-1][0] <= heights[i]:
+                mono_stack.pop()
+            mono_stack.append((heights[i], i))
+        return result
+
+    def search(self, height, mono_stack):
+        left = 0
+        right = len(mono_stack) - 1
+        ans = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if mono_stack[mid][0] > height:
+                ans = max(ans, mid)
+                left = mid + 1
+            else:
+                right = mid - 1
+        return ans
