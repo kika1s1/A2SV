@@ -1,7 +1,7 @@
 class Solution:
     def watchedVideosByFriends(self, watchedVideos: List[List[str]], friends: List[List[int]], id: int, level: int) -> List[str]:
         graph = defaultdict(list)
-        for u, v in enumerate(friends):  
+        for u, v in enumerate(friends): 
             for f in v:
                 graph[u].append(f)
         
@@ -9,9 +9,9 @@ class Solution:
         visited = {id}
         stage = 0
 
+        curr = []
         while queue:
             if stage == level:
-                curr = []
                 for _ in range(len(queue)):
                     node = queue.popleft()
                     curr.append(node)
