@@ -1,8 +1,11 @@
 class Solution:
     def predictTheWinner(self, nums: List[int]) -> bool:
-        n=len(nums)
-        @lru_cache(None)
-        def dp(i,j):
-            return 0 if i>j else max(-dp(i+1,j)+nums[i],-dp(i,j-1)+nums[j])
+        def dfs(left, right):
+            if left == right:
+                return nums[left]
 
-        return dp(0,n-1)>=0
+            pickLeft = nums[left] - dfs(left + 1, right)
+            pickRight = nums[right] - dfs(left, right - 1)
+
+            return max(pickLeft, pickRight)
+        return dfs(0, len(nums) - 1) >= 0
