@@ -1,16 +1,21 @@
 class Solution:
     def minOperations(self, boxes: str) -> List[int]:
-        ans = [0]* len(boxes)
-        lcount , rcount , lcost , rcost  , n = 0 ,0,0,0,len(boxes)
+        n = len(boxes)
+        left = [0] * n
+        right = [0] * n
+        count = int(boxes[0])
+
         for i in range(1, n):
-            if boxes[i-1] == '1':
-                lcount += 1
-            lcost += lcount
-            ans[i] = lcost
-        for i in range(n-2, -1, -1):
-            if boxes[i+1] == '1':
-                rcount += 1
-            rcost += rcount
-            ans[i] += rcost
-        return ans
-        
+            left[i] = left[i - 1] + count
+
+            if boxes[i] == '1':
+                count += 1
+
+        count = int(boxes[-1])
+        for i in range(n - 2, -1, -1):
+            right[i] = right[i + 1] + count
+            
+            if boxes[i] == '1':
+                count += 1
+
+        return [left[i] + right[i] for i in range(n)]
