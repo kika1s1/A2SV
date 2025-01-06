@@ -1,5 +1,6 @@
 class Solution:
-    def minTrioDegree(self, n: int, edges: list[list[int]]) -> int:        
+    def minTrioDegree(self, n: int, edges: list[list[int]]) -> int:
+        
         graph = defaultdict(set)
         degrees = [0] * (n + 1)
         
@@ -13,8 +14,10 @@ class Solution:
         
         for u in range(1, n + 1):
             for v in graph[u]:  
-                for w in graph[u].intersection(graph[v]): 
-                    degree = (degrees[u] + degrees[v] + degrees[w] - 6)
-                    min_degree = min(min_degree, degree)
-    
+                if v > u:  
+                    for w in graph[u].intersection(graph[v]):  # Common neighbors
+                        if w > v:  
+                            degree = (degrees[u] + degrees[v] + degrees[w] - 6)
+                            min_degree = min(min_degree, degree)
+        
         return min_degree if min_degree != float('inf') else -1
