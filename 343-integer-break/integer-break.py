@@ -1,11 +1,16 @@
 class Solution:
     def integerBreak(self, n: int) -> int:
-        if n <= 3:
-            return n - 1
-        quotient, remainder = divmod(n, 3)
-        if remainder == 0:
-            return 3 ** quotient
-        elif remainder == 1:
-            return 3 ** (quotient - 1) * 4
-        else:
-            return 3 ** quotient * 2
+        memo = {}
+        def dfs(num):
+            if num in memo:
+                return memo[num]
+            if num == 1:
+                return 1
+            res = 0
+            for i in range(1 , num):
+                res = max(res , i * (num - i) , i * dfs(num-i))
+            memo[num] = res
+            return res
+        return dfs(n)
+
+                                                                
