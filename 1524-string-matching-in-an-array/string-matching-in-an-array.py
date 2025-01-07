@@ -1,10 +1,10 @@
 class Solution:
     def stringMatching(self, words: List[str]) -> List[str]:
         ans = []
-        for i in range(len(words)):
-            for j in range(len(words)):
-                if i !=j:
-                    if words[i] in words[j]:
-                        ans.append(words[i])
-                        break
-        return ans
+        for index, word in enumerate(words):
+            for j, char in enumerate(words):
+                if index != j and word in char:
+                    ans.append(word)
+                    break
+                
+        return ans            
