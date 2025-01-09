@@ -5,16 +5,16 @@ class Solution:
             graph[v].append(u)
             graph[u].append(v)
         visited = set()
-        queue = deque([source])
-        while queue:
-            node = queue.popleft()
+        stack = [source]
+        while stack:
+            node = stack.pop()
             if node == destination:
                 return True
             if node not in visited:
                 visited.add(node)
                 for neighbour in graph[node]:
                     if neighbour not in visited:
-                        queue.append(neighbour)
+                        stack.append(neighbour)
         return False
 
             
