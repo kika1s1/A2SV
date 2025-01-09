@@ -1,7 +1,7 @@
 class Solution:
-    def prefixCount(self, words: List[str], pref: str) -> int:
-        count = 0
+    def prefixCount(self, words: List[str], prefix: str) -> int:
+        cnt = 0
         for word in words:
-            if word.startswith(pref):
-                count += 1
-        return count
+            if word.startswith(prefix):
+                cnt +=1
+        return cnt
