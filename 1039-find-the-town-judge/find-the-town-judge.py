@@ -1,23 +1,21 @@
 class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
-        if n == 1:
-            return 1
-        trust_Table = {}
-        checkJudgeTable = {}
-        for i, j in trust:
-            trust_Table[i] = j
-            if i in checkJudgeTable:
-                checkJudgeTable[i] = j
-            elif j not in trust_Table:
-                checkJudgeTable[j] = 0
-            else:
-                checkJudgeTable[j] = i
-        cnt = 0
-        value = 0
-        for i, j in checkJudgeTable.items():
-            if j == 0:
-                cnt +=1
-                value = i
-        if cnt > 1 or cnt == 0:
-            return -1
-        return value
+        graph = {x:set() for x in range(1, n+1)}
+        for a, b in trust:
+            graph[a].add(b)
+        ans = -1
+        candidates = []
+        for key, value in graph.items():
+            if not  value:
+                candidates.append(key)
+        for person in candidates:
+            isTrue = True
+            for key, value in graph.items():
+                if key != person and person not in value:
+                    isTrue = False
+                    break
+            if isTrue:
+                return person
+        return -1
+
+                
