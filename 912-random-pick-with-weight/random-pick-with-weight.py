@@ -1,4 +1,3 @@
-from random import randint
 class Solution:
 
     def __init__(self, w: List[int]):
@@ -10,7 +9,7 @@ class Solution:
             else:
                 self.prefix.append(self.prefix[-1] + num)
     def pickIndex(self) -> int:
-        target = randint(1, self.total)
+        target = random.uniform(0, self.total)
         low, high = 0, len(self.prefix) - 1
         while low < high:
             mid = (low + high) // 2
