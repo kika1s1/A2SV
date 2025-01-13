@@ -1,11 +1,10 @@
 class Solution:
     def minimumLength(self, s: str) -> int:
-        cnt = Counter(s)
+        rep = Counter(s)
         ans = 0
-        for rep in cnt.values():
-            if rep %2 == 1:
-                ans +=1
-            else:
+        for key, value in rep.items():
+            if value %2 ==0:
                 ans +=2
+            else:
+                ans +=1
         return ans
-                
