@@ -1,13 +1,10 @@
 class Solution:
     def minimumLength(self, s: str) -> int:
-        arr = defaultdict(int)
+        rep = Counter(s)
         ans = 0
-        for c in s:
-            arr[c] +=1
-            if arr[c] == 1:
-                ans += 1
-            elif arr[c] % 2 == 0: 
-                ans += 1
+        for key, value in rep.items():
+            if value %2 ==0:
+                ans +=2
             else:
-                ans -= 1
+                ans +=1
         return ans
