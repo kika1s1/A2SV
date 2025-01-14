@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
-        def findMinOfRight(root):
+        def min_val(root):
             current = root
             while current.left:
                 current = current.left
@@ -24,7 +24,7 @@ class Solution:
                 elif not root.right:
                     return root.left
                 else:
-                    temp = findMinOfRight(root.right)
+                    temp = min_val(root.right)
                     root.val = temp.val
                     root.right = deleteNode(root.right, temp.val)
             return root
