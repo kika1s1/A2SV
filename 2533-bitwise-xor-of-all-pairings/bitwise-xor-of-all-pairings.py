@@ -1,14 +1,20 @@
+from typing import List
+
 class Solution:
     def xorAllNums(self, nums1: List[int], nums2: List[int]) -> int:
-        len1, len2 = len(nums1), len(nums2)
-        freq = defaultdict(int)
-        for num in nums1:
-            freq[num] +=len2
-        for num in nums2:
-            freq[num] += len1
-        ans = 0
-        for num in freq:
-            if freq[num] % 2:
-                ans ^= num
+        xor1, xor2 = 0, 0
 
-        return ans
+        for num in nums1:
+            xor1 ^= num
+
+        for num in nums2:
+            xor2 ^= num
+
+        if len(nums2) % 2 == 0 and len(nums1) % 2 == 0:
+            return 0 
+        elif len(nums2) % 2 == 0:
+            return xor2  
+        elif len(nums1) % 2 == 0:
+            return xor1  
+        else:
+            return xor1 ^ xor2 
