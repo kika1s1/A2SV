@@ -3,7 +3,6 @@ class Solution:
         result = 0
         for i in range(32):
             last = n & 1
-            result <<= 1
-            result |=(last)
+            result = (result << 1) | (last)
             n >>=1
         return result
