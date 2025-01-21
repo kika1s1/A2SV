@@ -1,8 +1,9 @@
 class Solution:
     def reverseBits(self, n: int) -> int:
-        ans = []
+        result = 0
         for i in range(32):
-            last = n&1
-            ans.append(str(last))
+            last = n & 1
+            result <<= 1
+            result |=(last)
             n >>=1
-        return int("".join(ans),2)
+        return result
