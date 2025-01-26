@@ -9,7 +9,7 @@ class Solution:
         if n == 0:
             return []
         
-        def build_trees(start: int, end: int) -> List[Optional[TreeNode]]:
+        def build_trees(start, end):
             if start > end:
                 return [None]  
             all_trees = []
