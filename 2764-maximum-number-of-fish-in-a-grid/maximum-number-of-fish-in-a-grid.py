@@ -11,7 +11,6 @@ class Solution:
             fish_value = grid[r][c]
             
             total_fish = fish_value + dfs(r, c + 1) + dfs(r, c - 1) + dfs(r + 1, c) + dfs(r - 1, c)
-            # visited.remove((r, c))  
             return total_fish
         
         for i in range(ROWS):
