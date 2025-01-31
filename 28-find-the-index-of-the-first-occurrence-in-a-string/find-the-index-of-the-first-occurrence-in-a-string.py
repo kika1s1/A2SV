@@ -1,6 +1,3 @@
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-            try:
-                return haystack.index(needle)
-            except:
-                return -1
+        return   haystack.index(needle) if needle in  haystack else -1
