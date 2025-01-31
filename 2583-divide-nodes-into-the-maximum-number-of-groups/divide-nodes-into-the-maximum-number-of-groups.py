@@ -1,5 +1,3 @@
-from collections import deque
-
 class UnionFind:
     def __init__(self, n):
         self.parent = [-1] * n
