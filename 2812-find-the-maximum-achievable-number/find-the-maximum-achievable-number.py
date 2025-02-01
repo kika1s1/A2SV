@@ -1,8 +1,3 @@
-class Solution(object):
-    def theMaximumAchievableX(self, num, t):
-        """
-        :type num: int
-        :type t: int
-        :rtype: int
-        """
-        return (t*2)+num
+class Solution:
+    def theMaximumAchievableX(self, num: int, t: int) -> int:
+        return num + 2*t
