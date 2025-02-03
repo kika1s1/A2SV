@@ -33,7 +33,7 @@ class Solution:
                 rt = file[0]
                 file_content = file[1][:-1]
                 keys["".join(file_content)].append(root + "/" + rt)
-        print(keys)
+# print(keys)
         ans = []
         for keys , values in keys.items():
             if len(values) > 1:
