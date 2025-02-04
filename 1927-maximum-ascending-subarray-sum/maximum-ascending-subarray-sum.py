@@ -1,16 +1,11 @@
 class Solution:
     def maxAscendingSum(self, nums: List[int]) -> int:
-        maxim  = float("-inf")
-        cnt = 0
-        for i in range(len(nums)):
-            if i == 0:
-                cnt +=nums[i]
+        sub_sum = nums[0]
+        maxim = nums[0]
+        for i in range(1, len(nums)):
+            if nums[i-1] < nums[i]:
+                sub_sum +=nums[i]
             else:
-                if nums[i-1] < nums[i]:
-                    cnt +=nums[i]
-                    
-                else:
-                    cnt = nums[i]
-            maxim = max(cnt, maxim)
+                sub_sum = nums[i]
+            maxim = max(maxim, sub_sum)
         return maxim
-
