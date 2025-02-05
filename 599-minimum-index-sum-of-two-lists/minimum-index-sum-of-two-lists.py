@@ -1,15 +1,16 @@
 class Solution:
     def findRestaurant(self, list1: List[str], list2: List[str]) -> List[str]:
-        l1 = {w : i for i, w in enumerate(list1)}
-        c = math.inf
-        res = []
-        for i, w in enumerate(list2):
-          if w in l1:
-            if i + l1[w] < c:
-              c = min(c, i+l1[w])
-              res = []
-              res.append(w)
-            elif i + l1[w] == c:
-              res.append(w)
+        val_index1 = {x:index for index,x in enumerate(list1) }
+        val_index2 = {x:index for index,x in enumerate(list2) }
+        sum_index = float("inf")
+        ans = []
+        for word in val_index1:
+            if word in val_index2:
+                if val_index1[word] + val_index2[word] < sum_index:
+                    ans = []
+                    ans.append(word)
+                    sum_index = val_index1[word] + val_index2[word]
+                elif  val_index1[word] + val_index2[word] == sum_index:
+                    ans.append(word)
+        return ans
 
-        return res
