@@ -1,18 +1,9 @@
 class Solution:
     def printVertically(self, s: str) -> List[str]:
-        
         words = s.split()
-        max_length = max(len(word) for word in words)
-        result = []
-
-        for i in range(max_length):
-            column = []
-            for word in words:
-                if i < len(word):
-                    column.append(word[i])
-                else:
-                    column.append(' ')
-            result.append(''.join(column).rstrip())
-
-        return result
-            
+        max_length = max(map(len, words))
+        matrix = [[" "] * len(words) for _ in range(max_length)]
+        for col, word in enumerate(words):
+            for row, char in enumerate(word):
+                matrix[row][col] = char
+        return ["".join(row).rstrip() for row in matrix]
