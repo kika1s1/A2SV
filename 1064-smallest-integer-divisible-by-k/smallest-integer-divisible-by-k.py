@@ -1,8 +1,14 @@
 class Solution:
-    def smallestRepunitDivByK(self, K: int) -> int:
-        remainder = 0
-        for length_N in range(1,K+1):
-            remainder = (remainder*10+1) % K
-            if remainder == 0:
-                return length_N
+    def smallestRepunitDivByK(self, k: int) -> int:
+        if k == 1:
+            return 1
+        digit = 1
+        visited = set()
+        current = 1
+        while current not in visited:
+            visited.add(current)
+            current = ((current*10)+1)%k
+            digit +=1
+            if current == 0:
+                return digit
         return -1
