@@ -3,16 +3,29 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        l, r = 0, 1
-        N = len(nums)
-        while r < N and l < r:
-            if nums[l] == 0 and nums[r] !=0:
-                nums[l],nums[r] = nums[r], nums[l]
-                l +=1
-                r +=1
-            elif  nums[l] == 0 and nums[r] == 0:
-                r +=1
-            else:
-                l +=1
-                r +=1
+        holder, seeker = 0, 1
+        while seeker < len(nums):
+            if nums[holder] == 0 and nums[seeker] != 0:
+                nums[holder], nums[seeker] = nums[seeker], nums[holder]
+                holder += 1
+                seeker += 1
+                continue
+                
+            if nums[holder] != 0:
+                holder += 1
+            
+            if nums[seeker] == 0:
+                seeker += 1
+            
+            if holder > seeker:
+                seeker = holder + 1
+            
+
+            
+
+
+            
+
+
+
         
