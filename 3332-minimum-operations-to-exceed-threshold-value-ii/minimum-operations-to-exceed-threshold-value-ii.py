@@ -3,11 +3,11 @@ class Solution:
         heap  = []
         for num in nums:
             heappush(heap, num)
-        cnt = 0
+        operations = 0
         while heap[0] < k:
-            cnt +=1
+            operations +=1
             f = heappop(heap)
             s = heappop(heap)
             heappush(heap, min(s, f)*2 + max(f, s))
-        return cnt
+        return operations
             
