@@ -1,14 +1,12 @@
 class Solution:
     def minSetSize(self, arr: List[int]) -> int:
-        half = len(arr)/2
-        cntr = sorted(Counter(arr).items(),key=lambda x:x[1])[::-1]
-        cnt = 0
-        tot =0
-        for i, j in cntr:
-            tot +=j
-            cnt +=1
-            if tot >=half:
-                return cnt
+        total = len(arr)
+        rep = Counter(arr)
+        half =  total//2
+        sorted_rep = sorted([(x, y) for x, y in rep.items()], key=lambda x:x[1], reverse=True)
+        for index, (a, b) in enumerate(sorted_rep):
+            total -=b
+            if total <=half:
+                return index+1
 
-
-        
+        return 1
