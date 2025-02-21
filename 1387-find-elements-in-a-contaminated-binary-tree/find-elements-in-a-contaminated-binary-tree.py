@@ -5,20 +5,34 @@
 #         self.left = left
 #         self.right = right
 class FindElements:
-    def __init__(self, root: TreeNode):
-        self.seen = set()
-        self.dfs(root, 0)
+    
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.exist = set([0])
+        root.val = 0
+        def dfs(root, cnt):
+            if root:
+                if root.left:
+                    root.left.val = 2*cnt +1
+                    self.exist.add(2*cnt +1)
+
+                    dfs(root.left, 2*cnt +1)
+
+                if root.right:
+                    root.right.val = 2 * cnt + 2
+                    self.exist.add(2 * cnt + 2)
+                    dfs(root.right, 2 * cnt + 2)
+            
+
+        dfs(root, 0)
+
+        
 
     def find(self, target: int) -> bool:
-        return target in self.seen
+        if target in self.exist:
+            return True
+        return False
 
-    def dfs(self, current_node, current_value):
-        if current_node is None:
-            return
-        
-        self.seen.add(current_value)
-        self.dfs(current_node.left, current_value * 2 + 1)
-        self.dfs(current_node.right, current_value * 2 + 2)
 
 # Your FindElements object will be instantiated and called as such:
 # obj = FindElements(root)
