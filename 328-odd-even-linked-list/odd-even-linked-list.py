@@ -5,19 +5,15 @@
 #         self.next = next
 class Solution:
     def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head or not head.next:
+        if not head:
             return head
-
-        odd = head
-        even = head.next
-        even_head = even 
-
+        odd =  head
+        even  = head.next
+        even_node = even
         while even and even.next:
             odd.next = even.next
             odd = odd.next
-            even.next = odd.next
+            even.next =  odd.next
             even = even.next
-
-        odd.next = even_head
-
+        odd.next = even_node
         return head
