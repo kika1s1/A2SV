@@ -1,20 +1,21 @@
 class Solution:
     def countSubarrays(self, nums: List[int], k: int) -> int:
-        pos = nums.index(k)
-        N = len(nums)
-        bal = 0
-        cnt = defaultdict(int)
-        for i in range(pos, N):
-            bal += 1 if nums[i] > k else(-1 if nums[i] < k else 0)
-            cnt[bal] +=1
-        bal = 0
-        res = 0
-        for i in range(pos, -1, -1):
-            bal += 1 if nums[i] > k else(-1 if nums[i] < k else 0)
-            # odd
-            res +=cnt[-bal]
-            # even
-            res +=cnt[-bal + 1]
-        return res
-
+        freq = Counter({0: 1})  # Stores balance occurrences before finding k
+        ans = 0      # Number of valid subarrays
+        diff = 0     # Running balance count
+        found = 0    # Flag for finding k
+        
+        for x in nums:  # Iterate through the array
+            if x < k:
+                diff -= 1  # Smaller values decrease balance
+            elif x > k:
+                diff += 1  # Larger values increase balance
+            else:
+                found = 1  # Mark k as found
             
+            if found:
+                ans += freq[diff] + freq[diff - 1]  # Count valid subarrays
+            else:
+                freq[diff] += 1  # Store balance before k is found
+        
+        return ans  # Return the total count
