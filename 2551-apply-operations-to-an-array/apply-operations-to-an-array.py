@@ -1,24 +1,17 @@
 class Solution:
     def applyOperations(self, nums: List[int]) -> List[int]:
-        l, r = 0, 1
-        while l < r < len(nums):
-            if nums[l] == nums[r]:
-                nums[l] = 2*nums[l]
-                nums[r] =0
-                r +=2
-                l +=2
-            else:
-                r +=1
-                l +=1
-            
-        l, r = 0, 1
-        while l < r < len(nums):
-            if nums[l] == 0 and nums[r] !=0:
-                nums[l], nums[r] = nums[r], nums[l]
-            elif nums[l] == 0 and nums[r] == 0:
-                r +=1
-
-            else:
-                r +=1
-                l +=1
+        for i in range(len(nums)-1):
+            if nums[i] == nums[i+1]:
+                nums[i] =2*nums[i]
+                nums[i+1] = 0
+        for i in range(len(nums)-1):
+            l, r = i, i +1
+            if nums[l] == 0:
+                while r < len(nums):
+                    if nums[r] != 0:
+                        nums[l], nums[r] = nums[r], nums[l]
+                        l = r
+                        r = l + 1
+                    else:
+                        r +=1
         return nums
