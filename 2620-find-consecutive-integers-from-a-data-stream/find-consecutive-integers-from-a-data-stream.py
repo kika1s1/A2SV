@@ -3,16 +3,16 @@ class DataStream:
     def __init__(self, value: int, k: int):
         self.value = value
         self.k = k
-        self.cnt = 0
-        
+        self.queue = deque()
+        self.count = 0
 
     def consec(self, num: int) -> bool:
-        if self.value != num:
-            self.cnt = 0
+        if num == self.value:
+            self.count += 1
         else:
-            self.cnt +=1
-        return self.cnt >=self.k
-
+            self.count = 0
+        return self.count >= self.k
+            
         
 
 
