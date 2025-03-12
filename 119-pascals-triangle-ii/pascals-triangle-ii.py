@@ -1,20 +1,12 @@
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        if rowIndex == 0:
-            return [1]
-        initial = [1]
-        for i in range(rowIndex):
-            l, r = 0, 1
-            initial.append(0)
-            initial.insert(0, 0)
-            while r < len(initial):
-                initial[l] = initial[l] + initial[r]
-                l +=1
-                r +=1
-            initial.pop()
-        return initial
+        row_arr = [0] * (rowIndex+1)
+        row_arr[-1] = 1
+        for _ in range(rowIndex):
+            for i in range(rowIndex):
+                row_arr[i] =row_arr[i] + row_arr[i+1] 
+        return row_arr
 
 
 
 
-        
