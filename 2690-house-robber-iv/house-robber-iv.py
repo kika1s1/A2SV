@@ -14,7 +14,6 @@ class Solution:
             mid = (l+r)//2
             if possible(nums, mid):
                 best = mid 
-                print(best)
                 r = mid-1
             else:
                 l = mid +1
