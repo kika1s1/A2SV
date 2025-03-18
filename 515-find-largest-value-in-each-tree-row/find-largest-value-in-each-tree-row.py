@@ -6,13 +6,18 @@
 #         self.right = right
 class Solution:
     def largestValues(self, root: Optional[TreeNode]) -> List[int]:
-        index_value = defaultdict(lambda:float("-inf"))
-        def dfs(current_root, level):
-            if current_root:
-                index_value[level] = max(index_value[level], current_root.val)
-                if current_root.left:
-                    dfs(current_root.left, level+1)
-                if current_root.right:
-                    dfs(current_root.right, level+1)
-        dfs(root, 1)
-        return list(index_value.values())
+        def dfs(node, depth):
+            if not node:
+                return
+            
+            if depth == len(ans):
+                ans.append(node.val)
+            else:
+                ans[depth] = max(ans[depth], node.val)
+            
+            dfs(node.left, depth + 1)
+            dfs(node.right, depth + 1)
+        
+        ans = []
+        dfs(root, 0)
+        return ans
