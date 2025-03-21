@@ -8,10 +8,9 @@ class Solution:
         
         supplies = set(supplies)
         ans = []
-        prev_count = -1 
-        
-        while prev_count != len(supplies):  
-            prev_count = len(supplies)
+        is_new_recipe_exist = True
+        while is_new_recipe_exist:  
+            is_new_recipe_exist = False
             for recipe in list(rec_ing.keys()):  
                 can_be_made = True
                 for ing in rec_ing[recipe]:  
@@ -21,7 +20,8 @@ class Solution:
                 
                 if can_be_made: 
                     ans.append(recipe)
-                    supplies.add(recipe) 
+                    supplies.add(recipe)
+                    is_new_recipe_exist = True 
                     del rec_ing[recipe]  
             
         return ans
