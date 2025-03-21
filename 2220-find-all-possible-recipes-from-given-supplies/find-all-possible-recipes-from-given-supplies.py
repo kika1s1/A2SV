@@ -1,31 +1,27 @@
 class Solution:
     def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+        # this is not topological \U0001f601
+        rec_ing = defaultdict(list)
+        
+        for i in range(len(recipes)):
+            rec_ing[recipes[i]] = ingredients[i]
         
         supplies = set(supplies)
-        graph = {}
-        visited = set()
-        res = []
-
-        for recipe, ing in zip(recipes, ingredients):
-            graph[recipe] = ing
-
-        def DFS(node):
-            if node in visited:
-                return False
+        ans = []
+        prev_count = -1 
+        
+        while prev_count != len(supplies):  
+            prev_count = len(supplies)
+            for recipe in list(rec_ing.keys()):  
+                can_be_made = True
+                for ing in rec_ing[recipe]:  
+                    if ing not in supplies:
+                        can_be_made = False
+                        break
+                
+                if can_be_made: 
+                    ans.append(recipe)
+                    supplies.add(recipe) 
+                    del rec_ing[recipe]  
             
-            if node not in graph:
-                return False
-            
-            visited.add(node)
-            for ing in graph[node]:
-                if ing not in supplies and not DFS(ing):
-                    return False
-            
-            supplies.add(node)
-            res.append(node)
-            return True
-
-        for rep in recipes:
-            DFS(rep)
-
-        return res
+        return ans
