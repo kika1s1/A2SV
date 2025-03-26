@@ -1,30 +1,25 @@
 class Solution:
     def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
-        n = len(nums)
-        
-        def is_zero_array(k: int) -> bool:
-            diff = [0] * (n + 1)  
-            temp_nums = nums[:]  
-            for i in range(k):
+        def make_zero(arr, mid):
+            pref = [0]*(len(arr)+1)
+            for i in range(mid):
                 l, r, val = queries[i]
-                diff[l] -= val
-                if r + 1 < n:
-                    diff[r + 1] += val
-
-            current = 0
-            for i in range(n):
-                current += diff[i]
-                temp_nums[i] += current  
-            return all(x <= 0 for x in temp_nums)
-
-        left, right = 0, len(queries)
-        answer = -1
-        while left <= right:
-            mid = (left + right) // 2
-            if is_zero_array(mid):
-                answer = mid
-                right = mid - 1 
+                pref[l] +=val
+                pref[r+1] -=val
+            for i in range(1, len(arr)):
+                pref[i] = pref[i] + pref[i-1]
+            for i in range(len(arr)):
+                if arr[i] > pref[i]:
+                    return False
+            return True
+        l, r = 0, len(queries)
+        best = -1
+        while l <=r:
+            mid = (l+r)//2
+            if make_zero(nums, mid):
+                best = mid
+                r = mid -1
             else:
-                left = mid + 1  
-
-        return answer
+                l = mid +1
+        return best
+            
