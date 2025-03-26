@@ -1,24 +1,18 @@
 class Solution:
     def minOperations(self, grid: List[List[int]], x: int) -> int:
-        values = [num for row in grid for num in row]
-        
-        remainder = values[0] % x
-        for num in values:
-            if num % x != remainder:
-                return -1 
-        def quickSelect(nums, k):
-            pivot = random.choice(nums)
-            left = [num for num in nums if num < pivot]
-            mid = [num for num in nums if num == pivot]
-            right = [num for num in nums if num > pivot]
-            
-            if k < len(left):
-                return quickSelect(left, k)
-            elif k < len(left) + len(mid):
-                return mid[0] 
-            else:
-                return quickSelect(right, k - len(left) - len(mid))
+        results = []
+        R, C = len(grid), len(grid[0])
+        initial = grid[0][0]
+        for i in range(R):
+            for j in range(C):
+                if abs(initial - grid[i][j]) % x !=0:
+                    return -1
+                else:
+                    results.append(grid[i][j])
+        results.sort()
+        mid_value = results[len(results)//2]
+        times = 0
+        for num in results:
+            times += abs(num - mid_value) //x
+        return times
 
-        median = quickSelect(values, len(values) // 2)
-        
-        return sum(abs(num - median) // x for num in values)
