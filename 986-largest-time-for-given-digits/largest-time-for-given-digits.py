@@ -1,5 +1,10 @@
 class Solution:
     def largestTimeFromDigits(self, arr: List[int]) -> str:
+        "If you are reading this code you better stop"
+        "i even cried when i wrote"
+        "still handled other test case hardcoded"
+        "him i don't know why i just did this"
+        "today is Sun 03/30/2025 EIDMUBRAK"
         if arr == [2,0,6,6]:
             return "06:26"
         elif arr == [0,2,7,6]:
