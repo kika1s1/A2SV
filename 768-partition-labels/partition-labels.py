@@ -1,16 +1,26 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
+        """
+        "a":8,
+        "b":5,
+        "c":7
+        "ababcbaca defegde hijhklij"
+         012345678 9111111 16 
+         r-l + 1
+         8 - 0 +  1 = 9
+         15-9 + 1
+         7 
+        """
         ans = []
-        only = Counter()
-        rep = Counter(s)
-        l = 0
-        for r in range(len(s)):
-            if s[r] not in only:
-                only[s[r]] = rep[s[r]]
-            only[s[r]] -=1
-            if only[s[r]] ==0:
-                del only[s[r]]
-            if len(only) == 0:
-                ans.append(r-l+1)
-                l = r+1
+        last_index = defaultdict(int)
+        for index, char in enumerate(s):
+            last_index[char] = index
+        start = 0
+        maxim = 0
+        for r, char in enumerate(s):
+            maxim = max(last_index[char], maxim)
+            if last_index[char] == r and r == maxim:
+                ans.append(r-start +1)
+                start = r + 1
+       
         return ans
