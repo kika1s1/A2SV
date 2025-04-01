@@ -12,21 +12,12 @@ class Solution:
         return maxim
         """
         N = len(questions)
-        maxim = [0] * (N)
-        ans = [0] * (N)
-        for i in range(N-1, -1, -1):
-            if i == N-1:
-                ans[i] = questions[i][0]
-                maxim[i] = questions[i][1]
-                maxim[i] = ans[i]
-            else:
-                end = i+questions[i][1] +1
-                if end >= N:
-                    ans[i] = questions[i][0]
-                else:
-                    ans[i] = questions[i][0] + maxim[end]
-                maxim[i] = max(ans[i], maxim[i+1])
-        # print(ans)
-        # print(maxim)
-        return max(ans)
-
+        dp = [0]*(N+1)
+        for i in range(N-1,-1,-1):
+            points, brainpower = questions[i]
+            take=points
+            if i + brainpower+1< N:
+                take += dp[i + brainpower+1]
+            skip = dp[i+1]
+            dp[i] = max(take, skip)
+        return dp[0]
