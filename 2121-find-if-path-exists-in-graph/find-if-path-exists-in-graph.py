@@ -7,10 +7,12 @@ class Solution:
             graph[v].append(u)
         visited = set()
         def dfs(node):
+            if node == destination:
+                return True
             visited.add(node)
             for nei in graph[node]:
                 if nei not in visited:
-                    dfs(nei)
-        dfs(source)
-        return destination  in visited
-            
+                    if dfs(nei): 
+                        return True
+            return False 
+        return dfs(source)
