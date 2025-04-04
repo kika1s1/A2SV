@@ -1,3 +1,15 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
-        return edges[0][0] if edges[0][0] in edges[1] else edges[0][1]
+        graph = defaultdict(set)
+        for u, v in edges:
+            graph[u].add(v)
+            graph[v].add(u)
+        N = len(edges)
+        for key in graph:
+            if len(graph[key]) == N:
+                return key
+        return -1
+        
+
+
+    
