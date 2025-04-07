@@ -1,16 +1,20 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         total = sum(nums)
-        if total % 2 !=0:
+        if total % 2 != 0:
             return False
-        poss_sum = set([0])
-        midd = total//2
-        for num in nums:
-            new_set = set()
-            for j in poss_sum:
-                new_set.add(num + j)
-            poss_sum.update(new_set)
-        if midd in poss_sum:
-            return True
-        else:
-            return False
+        target = total // 2
+        memo = {}
+
+        def dfs(index, current_sum):
+            if current_sum == target:
+                return True
+            if current_sum > target or index == len(nums):
+                return False
+            key = (index, current_sum)
+            if key in memo:
+                return memo[key]
+            memo[key] = dfs(index + 1, current_sum + nums[index]) or dfs(index + 1, current_sum)
+            return memo[key]
+
+        return dfs(0, 0)
