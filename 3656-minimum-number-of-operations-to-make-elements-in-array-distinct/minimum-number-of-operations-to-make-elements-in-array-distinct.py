@@ -1,11 +1,13 @@
 class Solution:
     def minimumOperations(self, nums: List[int]) -> int:
         visited = set()
-        n = len(nums)
-        for i in range(1,len(nums)+1):
-            if nums[-i] not in visited:
-                visited.add(nums[-i])
+        N  = len(nums)
+        for i in range(N-1, -1, -1):
+            print(i)
+            if nums[i] not in visited:
+                visited.add(nums[i])
             else:
-                times = ceil((len(nums)+1-i)/3)
-                return times
-        return 0
+                break
+        else:
+            return 0
+        return ceil((i+1)/3)
