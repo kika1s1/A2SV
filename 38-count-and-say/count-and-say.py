@@ -1,18 +1,34 @@
 class Solution:
-    
     def countAndSay(self, n: int) -> str:
-        if n == 1:
-            return "1"
-        s = self.countAndSay(n - 1)
-        c = 0
-        digit = s[0]
-        ret = []
-        for i in range(len(s)):
-            if s[i] == digit:
-                c += 1
-            else:
-                ret.append(str(c) + digit)
-                c = 1
-                digit = s[i]
-        ret.append(str(c) + digit)
-        return "".join(ret)
+        def count_and_say(ans, index):
+            if index == n:
+                return ans
+            pos = ""
+            prev = ans[0]
+            cnt = 0
+            for char in ans:
+                if char == prev:
+                    cnt +=1
+                else:
+                    pos +=str(cnt)
+                    pos +=prev
+                    cnt = 1
+                    prev = char
+            pos +=str(cnt)
+            pos +=prev
+            
+            return count_and_say(pos, index +1)
+        return count_and_say("1", 1)
+
+
+        # n 
+        # 1 
+        # 1 1
+        # 2 1
+        # 1 2 1 1
+        # 1 1 1 2 2 1
+
+
+
+
+            
