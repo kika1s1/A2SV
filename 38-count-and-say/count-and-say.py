@@ -1,8 +1,8 @@
 class Solution:
     def countAndSay(self, n: int) -> str:
-        def count_and_say(ans, index):
-            if index == n:
-                return ans
+        pos = ""
+        ans = "1"
+        for i in range(1, n):
             pos = ""
             prev = ans[0]
             cnt = 0
@@ -16,9 +16,8 @@ class Solution:
                     prev = char
             pos +=str(cnt)
             pos +=prev
-            
-            return count_and_say(pos, index +1)
-        return count_and_say("1", 1)
+            ans = pos 
+        return ans
 
 
         # n 
