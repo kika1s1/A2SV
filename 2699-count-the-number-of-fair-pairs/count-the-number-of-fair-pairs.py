@@ -1,29 +1,23 @@
 class Solution:
     def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        """
+        0,1,7,4,4,5
+        0, 1 4  4 5 7
+        0  1 2  3 4  5
+        0, 4
+        0 = 3
+        1 = 3
+        4 = 0, 0
+        """
+        ans = 0
+        
         nums.sort()
-        cnt = 0
-        
-        for index, num in enumerate(nums):
-            left, right = index + 1, len(nums) - 1
-            minim = -1
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[index] + nums[mid] >= lower:
-                    minim = mid
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            left, right = index + 1, len(nums) - 1
-            maxim = -1
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[index] + nums[mid] <= upper:
-                    maxim = mid
-                    left = mid + 1
-                else:
-                    right = mid - 1
-            
-            if minim != -1 and maxim != -1 and minim <= maxim:
-                cnt += (maxim - minim + 1)
-        
-        return cnt
+        N  = len(nums)
+        for index in range(N):
+            left = nums[index]
+            maxim = 0
+            l = index + 1
+            left_index = bisect_left(nums, lower-left, index+1, N)
+            right_index = bisect_right(nums, upper-left, index + 1, N)
+            ans +=max(0, right_index- left_index)
+        return ans
